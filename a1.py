@@ -3,7 +3,7 @@ def seconds_difference(time_1, time_2):
 
     Return the number of seconds later that a time in seconds
     time_2 is than a time in seconds time_1.
-        
+
     >>> seconds_difference(1800.0, 3600.0)
     1800.0
     >>> seconds_difference(3600.0, 1800.0)
@@ -13,7 +13,8 @@ def seconds_difference(time_1, time_2):
     >>> seconds_difference(1800.0, 1800.0)
     0.0
     """
-    
+
+    return time_2 - time_1
 
 
 def hours_difference(time_1, time_2):
@@ -21,7 +22,7 @@ def hours_difference(time_1, time_2):
 
     Return the number of hours later that a time in seconds
     time_2 is than a time in seconds time_1.
-        
+
     >>> hours_difference(1800.0, 3600.0)
     0.5
     >>> hours_difference(3600.0, 1800.0)
@@ -32,6 +33,10 @@ def hours_difference(time_1, time_2):
     0.0
     """
 
+    hour_time_2 = (time_2 / 60) / 60
+    hour_time_1 = (time_1 / 60) / 60
+
+    return hour_time_2 - hour_time_1
 
 
 def to_float_hours(hours, minutes, seconds):
@@ -50,6 +55,10 @@ def to_float_hours(hours, minutes, seconds):
     1.01
     """
 
+    hours_from_minutes = minutes / 60
+    hours_from_seconds = seconds / 60 / 60
+
+    return hours + hours_from_minutes + hours_from_seconds
 
 
 def to_24_hour_clock(hours):
@@ -75,20 +84,79 @@ def to_24_hour_clock(hours):
     return hours % 24
 
 
-
 ### Write your get_hours function definition here:
+def get_hours(seconds):
+    """ (int) -> int
 
+    The parameter seconds is number of seconds since midnight.
+    Return the number of hours that have elapsed since midnight,
+    as seen on a 24-hour clock.
 
+    Precondition: seconds >= 0
+
+    >>> get_hours(3800)
+    1
+    >>> get_hours(3600)
+    1
+    >>> get_hours(3000)
+    0
+    >>> get_hours(90000)
+    1
+    """
+
+    # convert to hours
+    whole_hours = seconds // 60 // 60
+    return to_24_hour_clock(whole_hours)
 
 
 ### Write your get_minutes function definition here:
+def get_minutes(seconds):
+    """ (int) -> int
 
+    The parameter seconds is number of seconds since midnight.
+    Return the number of minutes that have elapsed since midnight as seen on a clock.
 
+    Precondition: seconds >= 0
+
+    >>> get_minutes(3800)
+    3
+    >>> get_minutes(3600)
+    0
+    >>> get_minutes(3000)
+    50
+    >>> get_minutes(90000)
+    0
+    """
+
+    # take the whole chunk of hours and get the remaining seconds
+    remaining_seconds = seconds % 3600
+    # now return the number of minutes
+    return remaining_seconds // 60
 
 
 ### Write your get_seconds function definition here:
+def get_seconds(seconds):
+    """ (int) -> int
 
+    The parameter seconds is number of seconds since midnight.
+    Return the number of seconds that have elapsed since midnight as seen on a clock.
 
+    Precondition: seconds >= 0
+
+    >>> get_seconds(3800)
+    20
+    >>> get_seconds(3600)
+    0
+    >>> get_seconds(3000)
+    0
+    >>> get_seconds(4510)
+    10
+    """
+
+    # take the whole chunk of hours and get the remaining seconds
+    remaining_seconds = seconds % 3600
+    # take the whole chunk of minutes and return the remaining seconds
+    return remaining_seconds % 60
 
 
 def time_to_utc(utc_offset, time):
@@ -111,6 +179,8 @@ def time_to_utc(utc_offset, time):
     0.0
     """
 
+    converted = time - utc_offset
+    return to_24_hour_clock(converted)
 
 
 def time_from_utc(utc_offset, time):
@@ -136,4 +206,5 @@ def time_from_utc(utc_offset, time):
     0.0
     """
 
-
+    converted = time + utc_offset
+    return to_24_hour_clock(converted)
