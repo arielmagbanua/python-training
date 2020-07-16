@@ -85,6 +85,10 @@ def board_contains_word_in_row(board, word):
 
     >>> board_contains_word_in_row([['A', 'N', 'T', 'T'], ['X', 'S', 'O', 'B']], 'SOB')
     True
+     >>> board_contains_word_in_row([['A', 'N', 'T', 'T'], ['X', 'S', 'O', 'B']], 'NTT')
+    True
+     >>> board_contains_word_in_row([['A', 'N', 'T', 'T'], ['X', 'S', 'O', 'B']], 'FOO')
+    False
     """
 
     for row_index in range(len(board)):
@@ -105,7 +109,19 @@ def board_contains_word_in_column(board, word):
 
     >>> board_contains_word_in_column([['A', 'N', 'T', 'T'], ['X', 'S', 'O', 'B']], 'NO')
     False
+    >>> board_contains_word_in_column([['A', 'N', 'T', 'T'], ['X', 'S', 'O', 'B']], 'NS')
+    True
+    >>> board_contains_word_in_column([['A', 'N', 'T', 'T'], ['X', 'S', 'O', 'B']], 'AX')
+    True
     """
+
+    col_word = ''
+
+    for row in board:
+        for column_index in range(len(row)):
+            if row[column_index] in word:
+                col_word = make_str_from_column(board, column_index)
+                return word == col_word
 
 
 def board_contains_word(board, word):
@@ -117,7 +133,13 @@ def board_contains_word(board, word):
 
     >>> board_contains_word([['A', 'N', 'T', 'T'], ['X', 'S', 'O', 'B']], 'ANT')
     True
+    >>> board_contains_word([['A', 'N', 'T', 'T'], ['X', 'S', 'O', 'B']], 'TT')
+    True
+    >>> board_contains_word([['A', 'N', 'T', 'T'], ['X', 'S', 'O', 'B']], 'BOB')
+    False
     """
+
+    return board_contains_word_in_row(board, word) or board_contains_word_in_column(board, word)
 
 
 def word_score(word):
