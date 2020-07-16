@@ -21,6 +21,10 @@ def is_valid_word(wordlist, word):
 
     >>> is_valid_word(['ANT', 'BOX', 'SOB', 'TO'], 'TO')
     True
+    >>> is_valid_word(['ANT', 'BOX', 'SOB', 'TO'], 'FOO')
+    False
+    >>> is_valid_word(['Foo', 'Bar', 'Hello', 'World'], 'Foo')
+    True
     """
 
     return word in wordlist
@@ -34,7 +38,18 @@ def make_str_from_row(board, row_index):
 
     >>> make_str_from_row([['A', 'N', 'T', 'T'], ['X', 'S', 'O', 'B']], 0)
     'ANTT'
+    >>> make_str_from_row([['A', 'N', 'T', 'T'], ['X', 'S', 'O', 'B']], 1)
+    'XSOB'
     """
+    if row_index >= len(board):
+        return ''
+
+    row = board[row_index]
+    word = ''
+    for char in row:
+        word += char
+
+    return word
 
 
 def make_str_from_column(board, column_index):
