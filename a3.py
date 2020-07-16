@@ -60,7 +60,18 @@ def make_str_from_column(board, column_index):
 
     >>> make_str_from_column([['A', 'N', 'T', 'T'], ['X', 'S', 'O', 'B']], 1)
     'NS'
+    >>> make_str_from_column([['A', 'N', 'T', 'T'], ['X', 'S', 'O', 'B']], 2)
+    'TO'
+    >>> make_str_from_column([['A', 'N', 'T', 'T'], ['X', 'S', 'O', 'B']], 0)
+    'AX'
     """
+
+    word = ''
+
+    for row in board:
+        word += row[column_index]
+
+    return word
 
 
 def board_contains_word_in_row(board, word):
