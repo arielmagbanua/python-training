@@ -23,6 +23,8 @@ def is_valid_word(wordlist, word):
     True
     """
 
+    return word in wordlist
+
 
 def make_str_from_row(board, row_index):
     """ (list of list of str, int) -> str
