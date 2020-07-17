@@ -113,13 +113,19 @@ def board_contains_word_in_column(board, word):
     True
     >>> board_contains_word_in_column([['A', 'N', 'T', 'T'], ['X', 'S', 'O', 'B']], 'AX')
     True
+    >>> board_contains_word_in_column([['A', 'N', 'T', 'T'], ['X', 'S', 'O', 'B']], 'TB')
+    True
     """
 
-    for row in board:
-        for column_index in range(len(row)):
-            if row[column_index] in word:
-                col_word = make_str_from_column(board, column_index)
-                return word == col_word
+    # get the index of the column if the first letter of the word
+    # belongs to the first row
+    for column_index in range(len(board[0])):
+        if board[0][column_index] == word[0]:
+            col_word = make_str_from_column(board, column_index)
+            if word == col_word:
+                return True
+
+    return False
 
 
 def board_contains_word(board, word):
