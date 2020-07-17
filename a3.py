@@ -152,7 +152,22 @@ def word_score(word):
 
     >>> word_score('DRUDGERY')
     16
+    >>> word_score('ARIEL')
+    5
+    >>> word_score('AT')
+    0
     """
+
+    word_length = len(word)
+
+    if word_length < 3:
+        return 0
+    elif 3 <= word_length <= 6:
+        return word_length * 1
+    elif 7 <= word_length <= 9:
+        return word_length * 2
+    else:
+        return word_length * 3
 
 
 def update_score(player_info, word):
