@@ -69,7 +69,8 @@ def make_str_from_column(board, column_index):
     word = ''
 
     for row in board:
-        word += row[column_index]
+        if len(row) > column_index:
+            word += row[column_index]
 
     return word
 
@@ -117,13 +118,17 @@ def board_contains_word_in_column(board, word):
     True
     """
 
-    # get the index of the column if the first letter of the word
-    # belongs to the first row
-    for column_index in range(len(board[0])):
-        if board[0][column_index] == word[0]:
-            col_word = make_str_from_column(board, column_index)
-            if word == col_word:
-                return True
+    # build list of column words
+    column_words = []
+    column_length = len(board[0])
+
+    for column_index in range(column_length):
+        column_words.append(make_str_from_column(board, column_index))
+
+    # determine if the word does exist
+    for column_word in column_words:
+        if word in column_word:
+            return True
 
     return False
 
@@ -236,4 +241,15 @@ def read_board(board_file):
     one row of the board per line. Newlines are not included in the board.
     """
 
-    return read_words(board_file)
+    board = []
+    words = read_words(board_file)
+
+    for word in words:
+        char_list = []
+
+        for char in word:
+            char_list.append(char)
+
+        board.append(char_list)
+
+    return board
