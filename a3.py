@@ -220,6 +220,14 @@ def read_words(words_file):
     from the standard English alphabet.
     """
 
+    lines = words_file.readlines()
+
+    # remove the last new line character of each word
+    for word_index in range(len(lines)):
+        lines[word_index] = lines[word_index].rstrip('\n')
+
+    return lines
+
 
 def read_board(board_file):
     """ (file open for reading) -> list of list of str
@@ -227,3 +235,5 @@ def read_board(board_file):
     Return a board read from open file board_file. The board file will contain
     one row of the board per line. Newlines are not included in the board.
     """
+
+    return read_words(board_file)
