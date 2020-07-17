@@ -115,8 +115,6 @@ def board_contains_word_in_column(board, word):
     True
     """
 
-    col_word = ''
-
     for row in board:
         for column_index in range(len(row)):
             if row[column_index] in word:
