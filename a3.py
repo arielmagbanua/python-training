@@ -193,12 +193,12 @@ def num_words_on_board(board, words):
 
     Return how many words appear on board.
 
-    >>> num_words_on_board([['A', 'N', 'T', 'T'], ['X', 'S', 'O', 'B']], ['ANT', 'BOX', 'SOB', 'TO'])
+    >>> num_words_on_board([['A', 'N', 'T', 'T'], ['X', 'S', 'O', 'B']], ['ANT', 'BOX', 'SOB', 'TO', 'AA'])
     3
     >>> num_words_on_board([['A', 'N', 'T', 'T'], ['X', 'S', 'O', 'B']], ['ANT', 'AX', 'TO'])
     3
     >>> num_words_on_board([['A', 'N', 'T', 'T'], ['X', 'S', 'O', 'B']], ['ANT', 'AX', 'TO', 'NS', 'XS'])
-    3
+    5
     """
 
     count = 0
