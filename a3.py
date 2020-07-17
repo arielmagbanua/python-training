@@ -189,6 +189,10 @@ def num_words_on_board(board, words):
 
     >>> num_words_on_board([['A', 'N', 'T', 'T'], ['X', 'S', 'O', 'B']], ['ANT', 'BOX', 'SOB', 'TO'])
     3
+    >>> num_words_on_board([['A', 'N', 'T', 'T'], ['X', 'S', 'O', 'B']], ['ANT', 'AX', 'TO'])
+    3
+    >>> num_words_on_board([['A', 'N', 'T', 'T'], ['X', 'S', 'O', 'B']], ['ANT', 'AX', 'TO', 'NS', 'XS'])
+    3
     """
 
     count = 0
