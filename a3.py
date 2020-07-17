@@ -179,6 +179,8 @@ def update_score(player_info, word):
     >>> update_score(['Jonathan', 4], 'ANT')
     """
 
+    player_info[1] += word_score(word)
+
 
 def num_words_on_board(board, words):
     """ (list of list of str, list of str) -> int
@@ -188,6 +190,14 @@ def num_words_on_board(board, words):
     >>> num_words_on_board([['A', 'N', 'T', 'T'], ['X', 'S', 'O', 'B']], ['ANT', 'BOX', 'SOB', 'TO'])
     3
     """
+
+    count = 0
+
+    for word in words:
+        if board_contains_word(board, word):
+            count += 1
+
+    return count
 
 
 def read_words(words_file):
