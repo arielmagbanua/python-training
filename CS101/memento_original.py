@@ -1,5 +1,4 @@
-from cs1graphics import Canvas
-from cs1graphics import Image
+from cs1graphics import *
 import time
 import random
 

@@ -7,7 +7,6 @@ canvas.setTitle("Memento")
 path = "./images/"
 names = ("Dohoo.jpg", "Jeongmin.jpg", "Jinyeong.jpg", 
          "Minsuk.jpg", "Sangjae.jpg", "Sungeun.jpg")
-
 cards = []
 num_pads = []
 tries = 1
