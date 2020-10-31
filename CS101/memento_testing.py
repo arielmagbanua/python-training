@@ -1,13 +1,14 @@
-from cs1graphics import Canvas
-from cs1graphics import Image
+from cs1graphics import *
 import time
-import random
+import os
 
 canvas = Canvas(640, 580)
 canvas.setTitle("Memento")
 
-path = ""
-names = ("Dohoo.jpg", "Jeongmin.jpg", "Jinyeong.jpg", "Minsuk.jpg", "Sangjae.jpg", "Sungeun.jpg")
+# path = "./images/"
+path = "CS101/images/"
+names = ("Dohoo.jpg", "Jeongmin.jpg", "Jinyeong.jpg", 
+         "Minsuk.jpg", "Sangjae.jpg", "Sungeun.jpg")
 
 cards = []
 num_pads = []
@@ -15,29 +16,15 @@ tries = 1
 correct_list = []
 
 def initialize():
-    list=[]
-    x=0
-    while True:
-        r=random.randint(0,5)
-        if r not in list: 
-            list.append(r)
-            x+=1
-        if x==6:
-            break
-    
-    print(list)
-
     # initialize cards
     for i in range(6):
         for k in range(4):
-            img = Image(path+names[list[i]])
-            temp_tuple = (img, names[list[i]])
+            # for windows only since it only works with absolute path
+            image_path = os.path.abspath(path+names[i])
+            # img = Image(path+names[i])
+            img = Image(image_path)
+            temp_tuple = (img, names[i])
             cards.append(temp_tuple)
-    """
-    for j in range(24):
-        print(cards[j][1])
-        print(" ")
-    """
     for i in range(24):
         card = Layer()
         rect = Rectangle(90, 120, Point(0, 0))
@@ -46,14 +33,11 @@ def initialize():
         card.add(text)
         num_pads.append(card)
 
-################################################################
-# 3-2-1. shuffle the card list
-################################################################
+    ################################################################
+    # 3-2-1. shuffle the card list
+    ################################################################
 
 def print_cards():
-    print(cards)
-    print(num_pads)
-    pass
     canvas.clear()
     w = 0
     h = 0
@@ -99,3 +83,25 @@ def check(num1, num2):
 initialize()
 print_cards()
 print("### Welcome to the Python Memento game!!! ###")
+# print(os.path.abspath("images/ariel.jpg"))
+
+###############################################################################
+while True: # 3-2-3. Rewrite the condition for termination
+###############################################################################
+
+    ###########################################################################
+    # 3-2-4. Print the number of tries and the corrected pairs
+    print(str(tries) + "th try. You got " + str(len(correct_list)//2) + " pairs.")
+    ###########################################################################
+    num1 = int(input("Enter the first number: "))
+    num2 = int(input("Enter the second number: "))
+    if not is_valid(num1, num2):
+        continue
+
+    if check(num1, num2):
+        print("Correct!")
+    else:
+        print("Wrong!")
+    ###########################################################################
+    # 3-2-5. Update number of tries (global variable, tries)
+    ###########################################################################
