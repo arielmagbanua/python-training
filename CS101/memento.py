@@ -6,8 +6,8 @@ canvas = Canvas(640, 580)
 canvas.setTitle("Memento")
 
 path = "./images/"
-names = ("Dohoo.jpg", "Jeongmin.jpg", "Jinyeong.jpg", 
-         "Minsuk.jpg", "Sangjae.jpg", "Sungeun.jpg")
+names = ("ariel.jpg", "howard.jpg", "leonard.jpg", 
+         "rajesh.jpg", "sheldon.jpg", "yuri.jpg")
 
 cards = []
 num_pads = []
@@ -184,7 +184,7 @@ print_cards()
 print("### Welcome to the Python Memento game!!! ###")
 
 ###############################################################################
-while True: # 3-2-3. Rewrite the condition for termination
+while len(correct_list) < (len(names) * 2): # 3-2-3. Rewrite the condition for termination
 ###############################################################################
 
     ###########################################################################
@@ -204,8 +204,3 @@ while True: # 3-2-3. Rewrite the condition for termination
     # 3-2-5. Update number of tries (global variable, tries)
     ###########################################################################
     tries += 1
-
-    # end the game if all the card are already guessed or found
-    if len(correct_list) == (len(names) * 2):
-        print('Congratulations! You have found all the pairs!')
-        break
