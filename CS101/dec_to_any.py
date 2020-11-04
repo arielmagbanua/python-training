@@ -86,7 +86,6 @@ def main():
         return
 
     radix = int(input('Enter a radix: '))
-
     if (radix > 16):
         print('Wrong Input!!!')
         return
