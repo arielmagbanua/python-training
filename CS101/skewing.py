@@ -1,7 +1,7 @@
 from math import *
 from cs1media import *
 
-image = load_picture("D:\\Training\\python-training\\CS101\\images\\test.png")
+image = load_picture("D:\\Training\\python-training\\CS101\\images\\dog_skate.jpg")
 # w, h = img.size()
 
 #----------------------------------------------------------#
@@ -43,7 +43,7 @@ def skew_vertical(img, angle):
 	# calculate the amount of skewness (height-wise)
 	# use the a (opposite) side formula for right triangle
 	angle_radians = radians(abs(angle))
-	opp = abs(tan(angle_radians)) * h
+	opp = tan(angle_radians) * h
 
 	# calculate the factor for skewing the sides during looping for each pixel
 	f = opp / h
@@ -80,7 +80,7 @@ def skew_horizontal(img, angle):
 	# calculate the amount of skewness (width-wise)
 	# use the a (opposite) side formula for right triangle
 	angle_radians = radians(abs(angle))
-	opp = abs(tan(angle_radians)) * w
+	opp = tan(angle_radians) * w
 
 	# calculate the factor for skewing the top during looping for each pixel
 	f = opp / w
