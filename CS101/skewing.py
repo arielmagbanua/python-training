@@ -71,7 +71,7 @@ def skew_vertical(img, angle):
 			# set the pixels
 			canvas.set(starting_x + x, starting_y + y, img.get(x, y))
 
-	# display the canvass
+	# display the canvas
 	canvas.show()
 
 def skew_horizontal(img, angle):
@@ -108,7 +108,7 @@ def skew_horizontal(img, angle):
 			# set the pixels
 			canvas.set(starting_x + x, starting_y + y, img.get(x, y))
 
-	# display the canvass
+	# display the canvas
 	canvas.show()
 
 direction = input('Direction: ')
