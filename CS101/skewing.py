@@ -45,7 +45,7 @@ def skew_vertical(img, angle):
 	angle_radians = radians(abs(angle))
 	opp = abs(tan(angle_radians)) * h
 
-	# calculate the factor for skewing the sides durin looping for each pixel
+	# calculate the factor for skewing the sides during looping for each pixel
 	f = opp / h
 
 	# create a black container canvass for the image
@@ -75,7 +75,41 @@ def skew_vertical(img, angle):
 	canvas.show()
 
 def skew_horizontal(img, angle):
-	pass
+	w, h = img.size()
+
+	# calculate the amount of skewness (width-wise)
+	# use the a (opposite) side formula for right triangle
+	angle_radians = radians(abs(angle))
+	opp = abs(tan(angle_radians)) * w
+
+	# calculate the factor for skewing the top during looping for each pixel
+	f = opp / w
+
+	# create a black container canvass for the image
+	canvas = create_picture(w, h + round(opp), (0,0,0))
+
+	# determine the starting location of x and y
+	starting_x = 0
+	increasing = True
+	if angle > 0:
+		starting_y = opp
+		increasing = False
+	else:
+		starting_y = 0
+		increasing = True
+
+	# loop through each pixels of the image
+	for x in range(w):
+		if increasing:
+			starting_y += f
+		else:
+			starting_y -= f
+		for y in range(h):
+			# set the pixels
+			canvas.set(starting_x + x, starting_y + y, img.get(x, y))
+
+	# display the canvass
+	canvas.show()
 
 direction = input('Direction: ')
 angle = int(input('Angle: '))
