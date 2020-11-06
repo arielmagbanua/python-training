@@ -1,7 +1,7 @@
 from math import *
 from cs1media import *
 
-img = load_picture("D:\\Training\\python-training\\CS101\\images\\test.png")
+image = load_picture("D:\\Training\\python-training\\CS101\\images\\test.png")
 # w, h = img.size()
 
 #----------------------------------------------------------#
@@ -114,4 +114,4 @@ def skew_horizontal(img, angle):
 direction = input('Direction: ')
 angle = int(input('Angle: '))
 
-skew(img, direction, angle)
+skew(image, direction, angle)
