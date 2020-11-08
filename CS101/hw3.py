@@ -97,6 +97,7 @@ def add_review(hotel_review_database, hotel_name, review):
 
 def sort_hotels(hotel_review_database, criteria, reverse):
     '''
+    (Task 3.4)
     We have to have different sorting mechanism for different keys and scenario
     '''
 
