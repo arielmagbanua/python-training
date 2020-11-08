@@ -1,5 +1,5 @@
-from PIL import Image
-from math import *
+# from PIL import Image
+# from math import *
 
 # img = Image.open("D:\\Training\\python-training\\CS101\\test.png")
 # width, height = img.size
@@ -11,8 +11,9 @@ from math import *
 # img.show()
 
 
-angle_radians = radians(abs(100))
+test1 = {} # truthy
 
-opp = tan(angle_radians) * 7
-
-print(opp)
+if test1:
+    print('test1 is truthy')
+else:
+    print('test1 is falsy')
