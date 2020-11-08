@@ -10,10 +10,11 @@
 
 # img.show()
 
+# test_list = [{'name':'Homer', 'age':39}, {'name':'Bart', 'age':10}]
+# sorted_list = sorted(test_list, key=lambda k: k['name'])
 
-test1 = {} # truthy
+# print(sorted_list)
 
-if test1:
-    print('test1 is truthy')
-else:
-    print('test1 is falsy')
+awts = ['hotel_name']
+
+print(awts == ['hotel_name'])
