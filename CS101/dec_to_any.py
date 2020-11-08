@@ -15,11 +15,11 @@ number_letters = 'ABCDEF'
 #
 #--------------------------------------------------------------#
 def dec_to_any_list(n, radix):
-    result = []
+    converted_number = []
     quotient = n
 
     if n < radix:
-        result.append(n)
+        converted_number.append(n)
 
     while quotient >= radix:
         quotien_result = math.floor(quotient / radix)
@@ -27,23 +27,25 @@ def dec_to_any_list(n, radix):
 
         quotient = quotien_result
 
-        result.append(remainder)
+        converted_number.append(remainder)
 
         if quotient < radix:
-            result.append(quotient)
-    
+            converted_number.append(quotient)
+
     # reverse the order
-    result = result[::-1]
+    converted_number = converted_number[::-1]
 
     # replace the numbers with letters depending on radix
     new_result = []
-    for num in result:
+
+    for num in converted_number:
         val = num
 
         if 10 <= num < radix:
             # compute for the right index and get the equivalent letter
-            val = number_letters[num - 10]
-        
+            index = num - 10
+            val = number_letters[index]
+
         new_result.append(val)
 
     return new_result
@@ -51,12 +53,16 @@ def dec_to_any_list(n, radix):
 def dec_to_any_string(n, radix):
     # get the list form of conversion
     converted = dec_to_any_list(n, radix)
-    
+ 
     # using list comprehension cast / convert each item to string 
-    converted = [str(item) for item in converted]
+    # converted = [str(item) for item in converted]
+
+    new_converted = []
+    for item in converted:
+        new_converted.append(str(item))
 
     # join the list into one string and return it
-    converted_number = ''.join(converted)
+    converted_number = ''.join(new_converted)
     return converted_number
 
 #--------------------------------------------------------------#
@@ -86,7 +92,7 @@ def main():
         return
 
     radix = int(input('Enter a radix: '))
-    if (radix > 16):
+    if (radix > 16 or radix < 2):
         print('Wrong Input!!!')
         return
 

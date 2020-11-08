@@ -40,9 +40,11 @@ def skew(img, direction, angle):
 def skew_vertical(img, angle):
 	w, h = img.size()
 
+	# convert angle in degrees to radians
+	angle_radians = radians(abs(angle))
+
 	# calculate the amount of skewness (height-wise)
 	# use the a (opposite) side formula for right triangle
-	angle_radians = radians(abs(angle))
 	opp = tan(angle_radians) * h
 
 	# calculate the factor for skewing the sides during looping for each pixel
