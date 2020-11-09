@@ -135,26 +135,22 @@ def sort_hotels(hotel_review_database, criteria, reverse):
             # execute the sorting
             sorted_database = sorted(hotel_review_database, key=key_lambda, reverse=True)
             return [h['hotel_name'] for h in sorted_database]
-            return sorted_database
 
         # this time we are sorting by how many 'very bad' reviews
         # order of values for sorting
         key_lambda = lambda hr: (hr['reviews']['very bad'], hr['reviews']['bad'], hr['reviews']['soso'], hr['reviews']['good'], hr['reviews']['very good'])
         # execute the sorting
         sorted_database = sorted(hotel_review_database, key=key_lambda, reverse=True)
-        sorted_database=[d.get('hotel_name') for d in sorted_database]
-        return sorted_database
+        return [h['hotel_name'] for h in sorted_database]
     
     if criteria == ['hotel_name']:
         sorted_database = sorted(hotel_review_database, key=lambda hr: hr['hotel_name'], reverse=reverse)
-        sorted_database=[d.get('hotel_name') for d in sorted_database]
-        return sorted_database
+        return [h['hotel_name'] for h in sorted_database]
     
     criteria_lambda = lambda hr: tuple(hr[cn] for cn in criteria)
     # execute the sorting
     sorted_database = sorted(hotel_review_database, key=criteria_lambda, reverse=reverse)
-    sorted_database=[d.get('hotel_name') for d in sorted_database]
-    return sorted_database
+    return [h['hotel_name'] for h in sorted_database]
 
 def extract_hotels(hotel_review_database, conditions):
     '''
