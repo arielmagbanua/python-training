@@ -21,11 +21,10 @@ hrs = {
     'number_of_reviews': 8
 }
 
-criteria = ['average_rating', 'hotel_name', 'number_of_reviews']
+criteria = ['average_rating', 'reviews', 'hotel_name', 'number_of_reviews']
 
-def crit_tup():
-    return (hrs[c] for c in criteria)
+print(criteria[-1])
 
-testing = tuple(hrs[c] for c in criteria)
+criteria.remove('reviews')
 
-print(testing)
+print(criteria)

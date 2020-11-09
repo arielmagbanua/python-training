@@ -95,13 +95,13 @@ def add_review(hotel_review_database, hotel_name, review):
     hotel_review_database[existing_hotel_review_index] = existing_hotel_review_dict
     return hotel_review_database
 
-def sort_hotels(hotel_review_database, criteria, reverse):
+# def sort_hotels(hotel_review_database, criteria, reverse):
     '''
     (Task 3.4)
     We have to have different sorting mechanism for different keys and scenario
     '''
-
-    if criteria == ['reviews']:
+    # if criteria == ['reviews']:
+    if 'reviews' in criteria:
         if reverse:
             # order of values for sorting
             key_lambda = lambda hr: (hr['reviews']['very good'], hr['reviews']['good'], hr['reviews']['soso'], hr['reviews']['bad'], hr['reviews']['very bad'])
@@ -120,6 +120,40 @@ def sort_hotels(hotel_review_database, criteria, reverse):
     criteria_lambda = lambda hr: tuple(hr[cn] for cn in criteria)
     # execute the sorting
     sorted_database = sorted(hotel_review_database, key=criteria_lambda, reverse=reverse)
+    return sorted_database
+
+def sort_hotels(hotel_review_database, criteria, reverse):
+    # remove the reviews if it is at the last of sort order
+    # this is because all sort tie will be broken before it reach 'reviews'
+    if 'reviews' == criteria[-1]:
+        criteria.remove('reviews')
+
+    if 'reviews' in criteria:
+        if reverse:
+            # order of values for sorting
+            key_lambda = lambda hr: (hr['reviews']['very good'], hr['reviews']['good'], hr['reviews']['soso'], hr['reviews']['bad'], hr['reviews']['very bad'])
+            # execute the sorting
+            sorted_database = sorted(hotel_review_database, key=key_lambda, reverse=True)
+            return [h['hotel_name'] for h in sorted_database]
+            return sorted_database
+
+        # this time we are sorting by how many 'very bad' reviews
+        # order of values for sorting
+        key_lambda = lambda hr: (hr['reviews']['very bad'], hr['reviews']['bad'], hr['reviews']['soso'], hr['reviews']['good'], hr['reviews']['very good'])
+        # execute the sorting
+        sorted_database = sorted(hotel_review_database, key=key_lambda, reverse=True)
+        sorted_database=[d.get('hotel_name') for d in sorted_database]
+        return sorted_database
+    
+    if criteria == ['hotel_name']:
+        sorted_database = sorted(hotel_review_database, key=lambda hr: hr['hotel_name'], reverse=reverse)
+        sorted_database=[d.get('hotel_name') for d in sorted_database]
+        return sorted_database
+    
+    criteria_lambda = lambda hr: tuple(hr[cn] for cn in criteria)
+    # execute the sorting
+    sorted_database = sorted(hotel_review_database, key=criteria_lambda, reverse=reverse)
+    sorted_database=[d.get('hotel_name') for d in sorted_database]
     return sorted_database
 
 def extract_hotels(hotel_review_database, conditions):
@@ -176,9 +210,10 @@ def main():
     # criteria = ['hotel_name']
     # criteria = ['reviews']
     # criteria = ['average_rating', 'number_of_reviews']
-    criteria = ['average_rating', 'hotel_name', 'number_of_reviews']
+    # criteria = ['average_rating', 'reviews', 'hotel_name', 'number_of_reviews']
+    criteria = ['reviews', 'average_rating']
 
-    reverse = False # is this descending order?
+    reverse = True # is this descending order?
 
     sorted_list = sort_hotels(hotel_review_database, criteria, reverse)
     # print(sorted_list)
