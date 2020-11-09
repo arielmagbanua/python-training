@@ -15,6 +15,17 @@
 
 # print(sorted_list)
 
-awts = ['hotel_name']
+hrs = {
+    'hotel_name': 'Marco Polo',
+    'average_rating': 3.5,
+    'number_of_reviews': 8
+}
 
-print(awts == ['hotel_name'])
+criteria = ['average_rating', 'hotel_name', 'number_of_reviews']
+
+def crit_tup():
+    return (hrs[c] for c in criteria)
+
+testing = tuple(hrs[c] for c in criteria)
+
+print(testing)

@@ -101,11 +101,6 @@ def sort_hotels(hotel_review_database, criteria, reverse):
     We have to have different sorting mechanism for different keys and scenario
     '''
 
-    # for sorting by hotel_name key
-    if criteria == ['hotel_name']:
-        sorted_database = sorted(hotel_review_database, key=lambda hr: hr['hotel_name'], reverse=reverse)
-        return sorted_database
-
     if criteria == ['reviews']:
         if reverse:
             # order of values for sorting
@@ -113,7 +108,7 @@ def sort_hotels(hotel_review_database, criteria, reverse):
             # execute the sorting
             sorted_database = sorted(hotel_review_database, key=key_lambda, reverse=True)
             return sorted_database
-
+        
         # this time we are sorting by how many 'very bad' reviews
         # order of values for sorting
         key_lambda = lambda hr: (hr['reviews']['very bad'], hr['reviews']['bad'], hr['reviews']['soso'], hr['reviews']['good'], hr['reviews']['very good'])
@@ -121,18 +116,10 @@ def sort_hotels(hotel_review_database, criteria, reverse):
         sorted_database = sorted(hotel_review_database, key=key_lambda, reverse=True)
         return sorted_database
 
-    if criteria == ['average_rating', 'number_of_reviews']:
-        # order of values for sorting
-        key_lambda = lambda hr: (hr['average_rating'], hr['number_of_reviews'])
-        # execute the sorting
-        sorted_database = sorted(hotel_review_database, key=key_lambda, reverse=reverse)
-        return sorted_database
-
-    # finally it could be we are sorting by number_of_reviews then average_rating
-    # order of values for sorting
-    key_lambda = lambda hr: (hr['number_of_reviews'], hr['average_rating'])
+    # build the criteria tuple from the list of criteria
+    criteria_lambda = lambda hr: tuple(hr[cn] for cn in criteria)
     # execute the sorting
-    sorted_database = sorted(hotel_review_database, key=key_lambda, reverse=reverse)
+    sorted_database = sorted(hotel_review_database, key=criteria_lambda, reverse=reverse)
     return sorted_database
 
 def extract_hotels(hotel_review_database, conditions):
@@ -189,11 +176,12 @@ def main():
     # criteria = ['hotel_name']
     # criteria = ['reviews']
     # criteria = ['average_rating', 'number_of_reviews']
-    criteria = ['number_of_reviews', 'average_rating']
+    criteria = ['average_rating', 'hotel_name', 'number_of_reviews']
 
-    reverse = True
+    reverse = False # is this descending order?
 
     sorted_list = sort_hotels(hotel_review_database, criteria, reverse)
+    # print(sorted_list)
     for hotel in sorted_list:
         print(hotel)
 
