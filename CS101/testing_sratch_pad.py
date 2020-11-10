@@ -15,16 +15,13 @@
 
 # print(sorted_list)
 
-hrs = {
-    'hotel_name': 'Marco Polo',
-    'average_rating': 3.5,
-    'number_of_reviews': 8
-}
+import re
 
-criteria = ['average_rating', 'reviews', 'hotel_name', 'number_of_reviews']
+data = '"AG","Antigua and Barbuda",17.05,-61.8'
+data = re.split(',((?=")|(?=\d)|(?=-))', data)
 
-print(criteria[-1])
+# remove empty string from the list
+# strip the " at both ends of each string
+data = [s.strip('"') for s in data if s!='']
 
-criteria.remove('reviews')
-
-print(criteria)
+print(data)
