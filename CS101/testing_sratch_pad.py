@@ -24,4 +24,9 @@ data = re.split(',((?=")|(?=\d)|(?=-))', data)
 # strip the " at both ends of each string
 data = [s.strip('"') for s in data if s!='']
 
-print(data)
+# print(data)
+
+test_tuples = [('A', (1,2)), ('B', (1,2)), ('C', (1,2))]
+
+dicts = {key:value for (key, value) in test_tuples}
+print(dicts)
