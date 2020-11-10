@@ -41,5 +41,9 @@ def read_average_lat_long_countries(countries_file):
         
 # execute read_average_lat_long_countries and unpack the return value
 country_names, country_coordinates = read_average_lat_long_countries('average-latitude-longitude-countries.csv')
-print(country_names)
-print(country_coordinates)
+# print(country_names)
+# print(country_coordinates)
+
+# print the names of all country whose location lies in the south of the equator
+for code, coordinates in country_coordinates:
+    # TODO: print country names
