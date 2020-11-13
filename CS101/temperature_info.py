@@ -42,7 +42,7 @@ for year, month_temperatures in years_temperatures.items():
     
     # print year: winter_avg/summer_avg
     print('{}: {}/{}'.format(year, winter_avg, summer_avg))
-   
+
     # convert each float temps to string
     month_temperatures = [str(temp) for temp in month_temperatures]
     # write year and temperatures as csv
