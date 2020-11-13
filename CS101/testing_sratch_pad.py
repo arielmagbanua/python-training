@@ -28,5 +28,5 @@ data = [s.strip('"') for s in data if s!='']
 
 test_tuples = [('A', (1,2)), ('B', (1,2)), ('C', (1,2))]
 
-dicts = {key:value for (key, value) in test_tuples}
+dicts = {key: value for (key, value) in test_tuples}
 print(dicts)

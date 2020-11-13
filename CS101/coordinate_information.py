@@ -44,6 +44,19 @@ country_names, country_coordinates = read_average_lat_long_countries('average-la
 # print(country_names)
 # print(country_coordinates)
 
+# convert the (code, name) tuple to dictionary for easier access of names
+# use dictionary comprehension to accomplish this
+countries_dict = {key: value for (key, value) in country_names}
+
 # print the names of all country whose location lies in the south of the equator
 for code, coordinates in country_coordinates:
-    # TODO: print country names
+    # unpack coordinates
+    lat, lng = coordinates
+
+    # print country names south of the equator
+    if 0 >= lat >= -90:
+        print(countries_dict[code])
+
+# ask for country code input and print the full name of that country
+country_code = input('Enter country code: ')
+print(countries_dict[country_code])
