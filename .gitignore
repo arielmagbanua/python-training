@@ -130,4 +130,5 @@ dmypy.json
 
 .idea/
 
-output.txt
+CS101/output.txt
+CS101/tpmon.csv
