@@ -23,7 +23,7 @@ for i in range(1, len(list_countries_data)):
     # remove empty string from the list
     # strip the " at both ends of each string
     data = [s.strip('"') for s in data if s!='']
-    
+
     # create the country (code, name) tuple and append it
     country_name = (data[0], data[1])
     country_names.append(country_name)
@@ -38,7 +38,7 @@ print(country_coordinates)
 
 # convert the (code, name) tuple to dictionary for easier access of names
 # use dictionary comprehension to accomplish this
-countries_dict = {key: value for (key, value) in country_names}
+countries_dict = {code: country_name for (code, country_name) in country_names}
 
 # print the names of all country whose location lies in the south of the equator
 for code, coordinates in country_coordinates:

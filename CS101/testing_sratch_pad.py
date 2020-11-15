@@ -33,15 +33,40 @@ dicts = {key: value for (key, value) in test_tuples}
 
 my_list = ['one','two','three', 4, 5]
 
-segment1 = my_list[0:2]
-print(segment1)
-segment2 = my_list[2:4]
-print(segment2)
+# segment1 = my_list[0:2]
+# print(segment1)
+# segment2 = my_list[2:4]
+# print(segment2)
 
-print(round(15.35, 1))
 
-decimal_count = 1
-print(ceil(15.352312 * 10) / 10)
-print(ceil(1.352312 * 10) / 10)
 
-print(ceil(153.5))
+# decimal_count = 1
+# print(ceil(15.352312 * 10) / 10)
+# print(ceil(1.352312 * 10) / 10)
+
+# print(ceil(153.5))
+
+# normal = '"CA","Canada",60,-95'
+
+# complex_data = '"CD","Congo, The Democratic Republic of the",0,25'
+
+# mylist = complex_data.split(',')
+# print(mylist)
+
+# country_dict = [('BY', 'Belarus'), ('CA', 'Canada')]
+
+
+# country_dict = {
+#     'BY': 'Belarus',
+#     'CA': 'Canada'
+# }
+
+# print(country_dict['CA'])
+
+# countries_dict['ZW']
+
+num = '14.0'
+
+test = float(num)
+
+print(test)
