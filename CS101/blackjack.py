@@ -100,13 +100,7 @@ def draw_card(dealer,player):
     bj_board.clear()
 
 
-
-
-
-
-
 def main():
-
     deck = []
     
     while True:
@@ -115,11 +109,11 @@ def main():
         if len(deck) < 12:
             deck = create_deck()
 
-    # create two hands of dealer and player
+        # create two hands of dealer and player
         dealer = []
         player = []
 
-    # initial two dealings
+        # initial two dealings
         card = deck.pop()
         print ("You are dealt " + card_string(card))
         player.append(card)
@@ -138,25 +132,25 @@ def main():
         dealer.append(card)
 
         print ("Your total is", hand_value(player))
-        draw_card(dealer,player)
+        draw_card(dealer, player)
 
-
-    # player's turn to draw cards
+        # player's turn to draw cards
         while hand_value(player) < 21 and ask_yesno("Would you like another card? (y/n) "):
-        # draw a card for the player
+            # draw a card for the player
             card = deck.pop()
             print ("You are dealt " + card_string(card))
             player.append(card)
             print ("Your total is", hand_value(player))
 
-            draw_card(dealer,player)
-    # if the player's score is over 21, the player loses immediately.
+        draw_card(dealer, player)
+
+        # if the player's score is over 21, the player loses immediately.
         if hand_value(player) > 21:
             print ("You went over 21! You lost.")
             dealer[0].state = True
-            draw_card(dealer,player)
+            draw_card(dealer, player)
         else:
-        # draw cards for the dealer while the dealer's score is less than 17
+            # draw cards for the dealer while the dealer's score is less than 17
             print ("\nThe dealer's hidden card was " + card_string(dealer[0]))
             while hand_value(dealer) < 17:
                 card = deck.pop()
@@ -165,8 +159,9 @@ def main():
                 print ("The dealer's total is", hand_value(dealer))
 
             dealer[0].state = True
-            draw_card(dealer,player)
-        # summary
+            draw_card(dealer, player)
+
+            # summary
             player_total = hand_value(player)
             dealer_total = hand_value(dealer)
             print ("\nYour total is", player_total)
@@ -182,11 +177,8 @@ def main():
                 else:
                     print ("You have a tie!")
 
-        if not ask_yesno("\nPlay another round? (y/n) "):
-            bj_board.close()
-            break
+            if not ask_yesno("\nPlay another round? (y/n) "):
+                bj_board.close()
+                break
 
-# main()
-
-deck = create_deck()
-print(deck)
+main()
