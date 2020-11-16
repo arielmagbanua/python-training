@@ -24,6 +24,15 @@ for i in range(1, len(list_countries_data)):
     # strip the " at both ends of each string
     data = [s.strip('"') for s in data if s!='']
 
+    temp = []
+    for s in data:
+        if s!='':
+            temp.appen(s.strip('"'))
+    
+    data = temp
+
+
+
     # create the country (code, name) tuple and append it
     country_name = (data[0], data[1])
     country_names.append(country_name)

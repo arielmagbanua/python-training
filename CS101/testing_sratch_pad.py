@@ -15,23 +15,23 @@
 
 # print(sorted_list)
 
-import re
-from math import *
+# import re
+# from math import *
 
-data = '"AG","Antigua and Barbuda",17.05,-61.8'
-data = re.split(',((?=")|(?=\d)|(?=-))', data)
+# data = '"AG","Antigua and Barbuda",17.05,-61.8'
+# data = re.split(',((?=")|(?=\d)|(?=-))', data)
 
-# remove empty string from the list
-# strip the " at both ends of each string
-data = [s.strip('"') for s in data if s!='']
+# # remove empty string from the list
+# # strip the " at both ends of each string
+# data = [s.strip('"') for s in data if s!='']
 
 # print(data)
 
-test_tuples = [('A', (1,2)), ('B', (1,2)), ('C', (1,2))]
+# test_tuples = [('A', (1,2)), ('B', (1,2)), ('C', (1,2))]
 
-dicts = {key: value for (key, value) in test_tuples}
+# dicts = {key: value for (key, value) in test_tuples}
 
-my_list = ['one','two','three', 4, 5]
+# my_list = ['one','two','three', 4, 5]
 
 # segment1 = my_list[0:2]
 # print(segment1)
@@ -65,8 +65,38 @@ my_list = ['one','two','three', 4, 5]
 
 # countries_dict['ZW']
 
-num = '14.0'
+# num = '14.0'
 
-test = float(num)
+# test = float(num)
 
-print(test)
+# print(test)
+
+class Person:
+    def __init__(self, name, height, weight):
+        self.name = name
+        self.height = height
+        self.weight = weight
+        self.something = 'something'
+        self.something1 = 'something1'
+        self.something2 = 'something2'
+
+    def say_name(self):
+        print(self.name)
+
+    def eat(self):
+        print('I am eating')
+    
+    def walk(self):
+        print('Walking!')
+
+    def __str__(self):
+        # print('str test')
+        return self.name
+
+ariel = Person('Ariel', 7.0, 80.0)
+
+ysa = Person('Ysa', 6.0, 56.0)
+
+print(ariel.something1)
+
+

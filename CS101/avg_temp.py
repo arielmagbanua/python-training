@@ -15,6 +15,8 @@ year = 1723
 tpmon_csv_file = open(path + 'tpmon.csv', 'w+')
 tpmon_csv_file.truncate(0)
 
+tpmon_csv_file.write('Year,Jan.,Feb.,Mar.,Apr., May.,Jun.,Jul.,Aug.,Sept.,Oct.,Nov.,Dec.\n')
+
 for i in range(1, len(monthly_temperatures)):
     # convert the temeratures string to list
     temps_list = monthly_temperatures[i].split()
@@ -36,17 +38,3 @@ for i in range(1, len(monthly_temperatures)):
     year += 1
 
 tpmon_csv_file.close()
-
-tpmon_csv_new = open(path + 'tpmon.csv')
-lines = tpmon_csv_new.readlines()
-tpmon_csv_new.close()
-
-header = 'Year,Jan.,Feb.,Mar.,Apr.,Jun.,Jul.,Aug.,Oct.,Nov.,Dec.\n'
-
-tpmon_csv_new = open(path + 'tpmon.csv', 'w+')
-tpmon_csv_new.write(header)
-
-for line in lines:
-    tpmon_csv_new.write(line)
-
-tpmon_csv_new.close()
