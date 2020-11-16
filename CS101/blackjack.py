@@ -1,7 +1,8 @@
 from random import *
 from cs1graphics import *
 
-img_path = './images/'
+# img_path = './images/'
+img_path = 'D:\\Training\\python-training\\CS101\\images\\'
 
 suit_names = ['Clubs', 'Diamonds', 'Hearts', 'Spades']
 face_names = ['Ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King']
@@ -37,7 +38,9 @@ def create_deck(number = 1):
     # create the 52 cards for the deck
     for suit in suit_names:
         for i in range(len(face_names)):
-            card = Card(suit, face_names[i], value[i], 'image', False)
+            image = '{}{}_{}.png'.format(img_path, suit, face_names[i])
+
+            card = Card(suit, face_names[i], value[i], image, False)
             deck.append(card)
     
     # shuffle and return the deck
