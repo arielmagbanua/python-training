@@ -17,12 +17,23 @@ bj_board = Canvas(600, 400, 'dark green', 'Black Jack 101')
 Define the Card class
 """
 class Card:
-    def __init__(self, suit, face, value, image, state):
+    def __init__(self, suit, face, value, state):
         self.suit = suit
         self.face = face
         self.value = value
-        self.image = image
         self.state = state
+    
+    def __setattr__(self, name, value):
+        if name == 'state':
+            if value:
+                # use Back image since his card is hidden
+                self.image = Image(img_path + 'Back.png')
+            else:
+                # use the correc face image
+                self.image = Image(img_path + self.face + '.png')
+        
+        # set the properties as usual
+        object.__setattr__(self, name, value)
 
 
 def create_deck(number = 1):
@@ -32,20 +43,20 @@ def create_deck(number = 1):
     A Card is represented by a object with four attributes: the face, the suit, value, state, and the image object
     First, Have to define class 'Card'
     """
+
     # prepare the deck
     deck = []
 
     # create the 52 cards for the deck
     for suit in suit_names:
         for i in range(len(face_names)):
-            image = '{}{}_{}.png'.format(img_path, suit, face_names[i])
-
-            card = Card(suit, face_names[i], value[i], image, False)
+            card = Card(suit, face_names[i], value[i], True)
             deck.append(card)
     
     # shuffle and return the deck
     shuffle(deck)
     return deck
+
 
 
 def hand_value(hand):
@@ -54,7 +65,8 @@ def hand_value(hand):
     Compute the value of the cards in the list "hand"
     """
 
-
+    values = [card.value for card in hand]
+    return sum(values)
 
 
 
@@ -65,8 +77,15 @@ def card_string(card):
     (sucn as "a King of Spades" or "an Ace of Diamonds")
     """
 
+    vowels = 'aeiou'
+    
+    # set the determiner to 'a' initially
+    determiner = 'a'
 
+    if card.face[0].lower() in vowels:
+        determiner = 'an'
 
+    return '{} {} of {}'.format(determiner, card.face, card.suit)
 
 
 
@@ -79,7 +98,22 @@ def ask_yesno(prompt):
 	repreting this until the user has entered a correct string.
     """
 
-def draw_card(dealer,player):
+    while True:
+        print(prompt)
+        user_input = input(prompt)
+
+        if user_input != 'y' and user_input != 'n':
+            print('I beg your pardon!')
+            continue
+            
+        if user_input == 'y':
+            return True
+        else:
+            return False
+
+
+
+def draw_card(dealer, player):
     """
     This funuction add the cards of dealer and player to canvas, bj_board.
     If the state of each Card object is false, then you have to show the hidden card image(Back.png).
@@ -97,8 +131,23 @@ def draw_card(dealer,player):
     help('cs1graphics.Text') -> about Text(),moveTo(), setDepth()
     """
     depth = 100
-    x0,y0 = 100,100
-    x1,y1 = 100,300
+
+    # start position of dealer's card
+    x0, y0 = 100, 100
+
+    # start position of player's card
+    x1, y1 = 100, 300
+
+    i_w = 72
+    i_h = 100
+
+    # calculate the the card count that can be fit column wise
+    for i in range(len(dealer)):
+        if dealer[i].state:
+            pass
+            # use the back card
+            # img = Image(img_path + 'Back.png')
+
 
     bj_board.clear()
 
@@ -184,4 +233,6 @@ def main():
                 bj_board.close()
                 break
 
-main()
+# main()
+
+# help('cs1graphics.Image')
