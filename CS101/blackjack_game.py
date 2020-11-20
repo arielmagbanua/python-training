@@ -163,7 +163,7 @@ def draw_card(dealer, player):
         dealers_hand_total += dealer[i].value
 
         x0 += slide_amount
-        depth -= 1
+        depth -= 5
 
     # create text display and draw it
     text_layer = Layer()
@@ -185,7 +185,7 @@ def draw_card(dealer, player):
         players_hand_total += player[i].value
 
         x1 += slide_amount
-        depth -= 1
+        depth -= 5
     
     # create text display and draw it
     text_layer = Layer()
