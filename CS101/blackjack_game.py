@@ -1,5 +1,6 @@
 from random import *
-from cs1graphics import *
+from cs1graphics import Image
+from cs1graphics import Canvas
 
 # img_path = './images/'
 img_path = 'D:\\Training\\python-training\\CS101\\images\\'
@@ -26,12 +27,13 @@ class Card:
     def __setattr__(self, name, value):
         if name == 'state':
             if value:
+                # use the correc face image
+                path = '{}{}_{}.png'.format(img_path, self.suit, self.face)
+                self.image = Image(path)
+            else:
                 # use Back image since his card is hidden
                 self.image = Image(img_path + 'Back.png')
-            else:
-                # use the correc face image
-                self.image = Image(img_path + self.face + '.png')
-        
+
         # set the properties as usual
         object.__setattr__(self, name, value)
 
@@ -99,7 +101,7 @@ def ask_yesno(prompt):
     """
 
     while True:
-        print(prompt)
+        # print(prompt)
         user_input = input(prompt)
 
         if user_input != 'y' and user_input != 'n':
@@ -130,26 +132,46 @@ def draw_card(dealer, player):
     help('cs1graphics.Image') -> about Image(), moveTo(), setDepth()
     help('cs1graphics.Text') -> about Text(),moveTo(), setDepth()
     """
-    depth = 100
+
+    bj_board.clear()
 
     # start position of dealer's card
-    x0, y0 = 100, 100
+    x0, y0 = 0, 0
 
     # start position of player's card
-    x1, y1 = 100, 300
+    x1, y1 = 0, 200
 
+    # the dimension of each cards
     i_w = 72
     i_h = 100
 
-    # calculate the the card count that can be fit column wise
+    # the amount of sliding during drawing of cards
+    slide_amount = 20
+
+    dealers_hand_total = 0
+    players_hand_total = 0
+
+    # draw dealer cards
+    depth = 100
     for i in range(len(dealer)):
-        if dealer[i].state:
-            pass
-            # use the back card
-            # img = Image(img_path + 'Back.png')
+        card_image = dealer[i].image
+        card_image.moveTo(i_w + x0, i_h + y0)
+        card_image.setDepth(depth)
+        bj_board.add(card_image)
 
+        x0 += slide_amount
+        depth -= 1
 
-    bj_board.clear()
+    # draw player cards
+    depth = 100
+    for i in range(len(player)):
+        card_image = player[i].image
+        card_image.moveTo(i_w + x1, i_h + y1)
+        card_image.setDepth(depth)
+        bj_board.add(card_image)
+
+        x1 += slide_amount
+        depth -= 1
 
 
 def main():
@@ -233,6 +255,6 @@ def main():
                 bj_board.close()
                 break
 
-# main()
+main()
 
 # help('cs1graphics.Image')
