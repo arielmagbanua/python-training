@@ -1,6 +1,5 @@
 from random import *
-from cs1graphics import Image
-from cs1graphics import Canvas
+from cs1graphics import *
 
 # img_path = './images/'
 img_path = 'D:\\Training\\python-training\\CS101\\images\\'
@@ -136,10 +135,10 @@ def draw_card(dealer, player):
     bj_board.clear()
 
     # start position of dealer's card
-    x0, y0 = 0, 0
+    x0, y0 = 35, 0
 
     # start position of player's card
-    x1, y1 = 0, 200
+    x1, y1 = 35, 200
 
     # the dimension of each cards
     i_w = 72
@@ -148,30 +147,53 @@ def draw_card(dealer, player):
     # the amount of sliding during drawing of cards
     slide_amount = 20
 
+    # initialize the total hand value of the dealer and player
     dealers_hand_total = 0
     players_hand_total = 0
 
     # draw dealer cards
     depth = 100
+    dealer = dealer[::-1]
     for i in range(len(dealer)):
         card_image = dealer[i].image
         card_image.moveTo(i_w + x0, i_h + y0)
         card_image.setDepth(depth)
         bj_board.add(card_image)
 
+        dealers_hand_total += dealer[i].value
+
         x0 += slide_amount
         depth -= 1
 
+    # create text display and draw it
+    text_layer = Layer()
+    text_str = "The dealer's Total: {}".format(dealers_hand_total)
+    text = Text(str(text_str), 14, Point(400, 100))
+    text.setFontColor(Color('greenyellow'))
+    text_layer.add(text)
+    bj_board.add(text_layer)
+
     # draw player cards
     depth = 100
+    player = player[::-1]
     for i in range(len(player)):
         card_image = player[i].image
         card_image.moveTo(i_w + x1, i_h + y1)
         card_image.setDepth(depth)
         bj_board.add(card_image)
 
+        players_hand_total += player[i].value
+
         x1 += slide_amount
         depth -= 1
+    
+    # create text display and draw it
+    text_layer = Layer()
+    text_str = "Your Total: {}".format(players_hand_total)
+    text = Text(str(text_str), 14, Point(422, 300))
+    text.setFontColor(Color('greenyellow'))
+    text_layer.add(text)
+    bj_board.add(text_layer)
 
 
 def main():
@@ -256,5 +278,3 @@ def main():
                 break
 
 main()
-
-# help('cs1graphics.Image')
