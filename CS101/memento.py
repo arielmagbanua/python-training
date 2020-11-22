@@ -5,9 +5,8 @@ from random import shuffle
 canvas = Canvas(640, 580)
 canvas.setTitle("Memento")
 
-path = "./images/"
-names = ("ariel.jpg", "howard.jpg", "leonard.jpg", 
-         "rajesh.jpg", "sheldon.jpg", "yuri.jpg")
+path = "D:\\Training\\python-training\\CS101\\images\\"
+names = ("Dohoo.jpg", "Jeongmin.jpg", "Jinyeong.jpg", "Minsuk.jpg", "Sangjae.jpg", "Sungeun.jpg")
 
 cards = []
 num_pads = []
@@ -22,12 +21,8 @@ def initialize():
     for i in range(6):
         for k in range(2):
             # images won't load in windows 10 replace it with text
-            # img = Image(path+names[i])
-            # temp_tuple = (img, names[i])
-            # cards.append(temp_tuple)
-            card = Layer()
-            text = Text(str(names[i]), 12, Point(0, 0))
-            temp_tuple = (text, names[i])
+            img = Image(path+names[i])
+            temp_tuple = (img, names[i])
             cards.append(temp_tuple)
 
     for i in range(24):
