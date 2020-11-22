@@ -135,7 +135,6 @@ def draw_card(dealer, player):
     help('cs1graphics.Image') -> about Image(), moveTo(), setDepth()
     help('cs1graphics.Text') -> about Text(),moveTo(), setDepth()
     """
-    depth = 100
     bj_board.clear()
 
     # start position of dealer's cards
@@ -151,13 +150,16 @@ def draw_card(dealer, player):
     # this is the amount per loop where we move x coordinate of printing
     slide_amount = 20
 
+    depth = 100
     # dealer = dealer[::-1]
     for card in dealer:
         card_image = card.image
         card_image.moveTo(x0 + i_w, y0 + i_h)
+        card_image.setDepth(depth)
         bj_board.add(card_image)
 
         x0 += slide_amount
+        depth -= 5
 
     # get the total hand value of dealer
     dealer_hand_value = hand_value(dealer)
@@ -168,13 +170,16 @@ def draw_card(dealer, player):
     text_layer.add(text)
     bj_board.add(text_layer)
 
+    depth = 100
     # player = player[::-1]
     for card in player:
         card_image = card.image
         card_image.moveTo(x1 + i_w, y1 + i_h)
+        card_image.setDepth(depth)
         bj_board.add(card_image)
 
         x1 += slide_amount
+        depth -= 5
 
     # get the total hand value of player
     player_hand_value = hand_value(player)
