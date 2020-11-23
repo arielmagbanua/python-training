@@ -109,6 +109,9 @@ def print_cards_with_selected(num1, num2):
         if i == num1 or i == num2:
             cards[i].image.moveTo(i_w + w, i_h + h)
             canvas.add(cards[i].image)
+        elif cards[i].guessed:
+            cards[i].image.moveTo(i_w + w, i_h + h)
+            canvas.add(cards[i].image)
         else:
             num_pads[i].image.moveTo(i_w + w, i_h+h)
             canvas.add(num_pads[i].image)
