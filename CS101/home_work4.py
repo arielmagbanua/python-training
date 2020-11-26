@@ -1,8 +1,10 @@
 import csv
 from typing import List, Tuple
 
+stocks_path = 'D:\Training\python-training\CS101\stock.csv'
+
 def csv_load_example():
-    with open('data/stock.csv', newline='') as csvfile:
+    with open(stocks_path, newline='') as csvfile:
         reader = csv.reader(csvfile, delimiter=',', quotechar='|')
         for row in reader:
             print(row)
@@ -28,7 +30,23 @@ def make_stock_tuples(data_dir: str) -> List[Tuple[str, str, str, str, float, in
     #################################################
     # YOUR CODE HERE
     #################################################
-    raise NotImplementedError
+    stocks = []
+
+    with open(stocks_path, newline='') as csvfile:
+        reader = csv.reader(csvfile, delimiter=',', quotechar='|')
+
+        # convert reader to list
+        stocks_data = list(reader)
+
+        # slice the real stocks data to exclude the header
+        stocks_data = stocks_data[1::]
+        
+        # create and append the stock tuples
+        for stock in stocks_data:
+            stock_tup = (str(stock[0]), str(stock[1]), str(stock[2]), str(stock[3]), float(stock[4]), int(stock[5]))
+            stocks.append(stock_tup)
+
+    return stocks
 
 class Price:
     """Price class."""
@@ -50,7 +68,9 @@ class Price:
         #################################################
         # YOUR CODE HERE
         #################################################
-        raise NotImplementedError
+        self.date = date
+        self.price = price
+        self.volume = volume
 
     def __repr__(self):
         return "<Price %s>" % self.date
@@ -97,7 +117,8 @@ class Market:
         #################################################
         # YOUR CODE HERE
         #################################################
-        raise NotImplementedError
+        self.name = name
+        self.stocks = stocks
 
     def __repr__(self):
         return "<Market %s>" % self.name
@@ -119,12 +140,12 @@ def convert_to_objects(stock_prices: List[Tuple[str, str, str, str, float, int]]
     #################################################
     # YOUR CODE HERE
     #################################################
-    raise NotImplementedError
+    
 
 
 if __name__ == "__main__":
-    csv_load_example()
+    # csv_load_example()
     # test your implementation
-    stock_tuples = make_stock_tuples('dir/to/data.csv')
+    stock_tuples = make_stock_tuples(stocks_path)
     markets = convert_to_objects(stock_tuples)
-    pass
+
