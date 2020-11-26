@@ -94,7 +94,9 @@ class Stock:
         #################################################
         # YOUR CODE HERE
         #################################################
-        raise NotImplementedError
+        self.name = name
+        self.symbol = symbol
+        self.prices = prices
 
     def __repr__(self):
         return "<Stock %s (%s)>" % (self.name, self.symbol)
@@ -144,7 +146,7 @@ def convert_to_objects(stock_prices: List[Tuple[str, str, str, str, float, int]]
 
 
 if __name__ == "__main__":
-    # csv_load_example()
+    csv_load_example()
     # test your implementation
     stock_tuples = make_stock_tuples(stocks_path)
     markets = convert_to_objects(stock_tuples)
