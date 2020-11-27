@@ -1,7 +1,11 @@
 import csv
-from typing import List, Tuple
+from typing import List, Tuple, Union
 
 stocks_path = 'D:\Training\python-training\CS101\stock.csv'
+
+#################################################
+# Task 4.1 Codes
+#################################################
 
 def csv_load_example():
     with open(stocks_path, newline='') as csvfile:
@@ -142,7 +146,45 @@ def convert_to_objects(stock_prices: List[Tuple[str, str, str, str, float, int]]
     #################################################
     # YOUR CODE HERE
     #################################################
+    markets = []
+    for stock_market_record in stock_prices:
+        # unpack and get all the field values
+        date, market, company_name, symbol, price, volume = stock_market_record
+
+        # create the price object
+        price = Price(date, price, volume)
+
+        # check if market already created
+        market_index = None
+        for i in range(len(markets)):
+            if markets[i].name == market:
+                market_index = i
+                break
+
+        if market_index == None:
+            # create the market object and add it to the market list
+            new_market = Market(market, [])
+            markets.append(new_market)
+            market_index = -1
+
+        # check if stock already created from the stock list of the current market
+        stock_index = None
+        for i in range(len(markets[market_index].stocks)):
+            if markets[market_index].stocks[i].symbol == symbol:
+                stock_index = i
+                break
+        
+        if stock_index == None:
+            # create the stock object with initial empty price list
+            new_stock = Stock(company_name, symbol, [])
+            # append the stock to the current market's stocks list
+            markets[market_index].stocks.append(new_stock)
+            stock_index = -1
+
+        # add the price to the stock that belongs to the current market
+        markets[market_index].stocks[stock_index].prices.append(price)
     
+    return markets
 
 
 if __name__ == "__main__":
@@ -150,4 +192,6 @@ if __name__ == "__main__":
     # test your implementation
     stock_tuples = make_stock_tuples(stocks_path)
     markets = convert_to_objects(stock_tuples)
+    print(markets)
+
 
