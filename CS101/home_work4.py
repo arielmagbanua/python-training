@@ -192,6 +192,8 @@ if __name__ == "__main__":
     # test your implementation
     stock_tuples = make_stock_tuples(stocks_path)
     markets = convert_to_objects(stock_tuples)
-
-
+    print(markets[0].stocks[0].name)
+    print(markets[0].stocks[1].symbol)
+    print(markets[1].stocks[0].prices[3].date)
+    print(markets[1].stocks[1].prices[3].price)
 
