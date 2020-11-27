@@ -1,5 +1,5 @@
 import csv
-from typing import List, Tuple, Union
+from typing import List, Tuple
 
 stocks_path = 'D:\Training\python-training\CS101\stock.csv'
 
@@ -192,6 +192,6 @@ if __name__ == "__main__":
     # test your implementation
     stock_tuples = make_stock_tuples(stocks_path)
     markets = convert_to_objects(stock_tuples)
-    print(markets)
+
 
 
