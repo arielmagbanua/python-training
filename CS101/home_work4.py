@@ -188,12 +188,20 @@ def convert_to_objects(stock_prices: List[Tuple[str, str, str, str, float, int]]
 
 
 if __name__ == "__main__":
-    csv_load_example()
+    # csv_load_example()
     # test your implementation
     stock_tuples = make_stock_tuples(stocks_path)
     markets = convert_to_objects(stock_tuples)
-    print(markets[0].stocks[0].name)
-    print(markets[0].stocks[1].symbol)
-    print(markets[1].stocks[0].prices[3].date)
-    print(markets[1].stocks[1].prices[3].price)
+    # print(markets[0].stocks[0].name)
+    # print(markets[0].stocks[1].symbol)
+    # print(markets[1].stocks[0].prices[3].date)
+    # print(markets[1].stocks[1].prices[3].price)
+
+    for market_obj in markets:
+        for stock in market_obj.stocks:
+            print(stock.name, stock.symbol)
+            for price in stock.prices:
+                if price.date == '2019-02-04':
+                    print(price.date, price.price)
+                    break
 
