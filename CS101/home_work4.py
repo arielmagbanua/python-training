@@ -3,10 +3,6 @@ from typing import List, Tuple
 
 stocks_path = 'D:\Training\python-training\CS101\stock.csv'
 
-#################################################
-# Task 4.1 Codes
-#################################################
-
 def csv_load_example():
     with open(stocks_path, newline='') as csvfile:
         reader = csv.reader(csvfile, delimiter=',', quotechar='|')
@@ -185,7 +181,6 @@ def convert_to_objects(stock_prices: List[Tuple[str, str, str, str, float, int]]
         markets[market_index].stocks[stock_index].prices.append(price)
     
     return markets
-
 
 
 if __name__ == "__main__":
