@@ -83,5 +83,8 @@
 
 prices_between = [12, 40, 19, 1, 0, 900, 32, 1, 1, 78]
 
-for price in prices_between[2::]:
-    print(price)
+max_item =  max(prices_between)
+print(max_item)
+
+# for price in prices_between[2::]:
+#     print(price)
