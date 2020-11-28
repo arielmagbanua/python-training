@@ -479,11 +479,11 @@ class Trader:
         #################################################
         # check if there's current holding
         # if exist, buying additional stocks are not allowed
-        if self.holdings:
+        if len(self.holdings) > 0:
             return
 
         # compute the maximum amount of stocks
-        stock_amount = self.balance / price
+        stock_amount = int(self.balance / price)
         # record the holding
         self.holdings = (date, ticker, stock_amount, price)
 
@@ -506,12 +506,16 @@ class Trader:
         #################################################
         # YOUR CODE HERE
         #################################################
+        # check if there is holdings
+        if len(self.holdings) == 0:
+            return
+
         # unpack holding
-        date, holding_ticker, stock_amount, price = self.holdings
+        holdings_date, holdings_ticker, holdings_stock_amount, holdings_price = self.holdings
         
-        if ticker == holding_ticker:
+        if ticker == holdings_ticker:
             # calculate the total amount that can be sold
-            sold = stock_amount * price
+            sold = holdings_stock_amount * price
 
             # add the sold amount to the balance
             new_balance = self.balance + sold
@@ -563,7 +567,26 @@ class Trader:
             if market_obj.name == market:
                 for stock in market_obj.stocks:
                     if stock.symbol == symbol:
-                        pass
+                        # get the starting index of the date
+                        start_date_index = None
+                        for i in range(len(stock.prices)):
+                            if date == stock.prices[i].date:
+                                start_date_index = i
+                                break
+
+                        # simulate from the designated starting date up to the last date
+                        for stock_price in stock.prices[start_date_index::]:
+                            # get the bollinger bands
+                            upper_band, lower_band = stock.get_bollinger_bands(stock_price.date)
+                            
+                            # buy if stock price is lower than the lower bollinger band
+                            if stock_price.price < lower_band:
+                                self.buy(ticker, stock_price.price, stock_price.date)
+                            
+                            # sell if price is higher than
+                            if stock_price.price > upper_band:
+                                self.sell(ticker, stock_price.price)
+
 
     def __repr__(self):
         return "<Trader %s>" % self.name
@@ -592,11 +615,19 @@ if __name__ == "__main__":
     #                 print(stock.get_average_volume("2020-02-03"))
     #                 print(stock.get_highest_price("2017-02-03"))
 
-    for market_obj in markets:
-        if market_obj.name == "NASDAQ":
-            for stock in market_obj.stocks:
-                if stock.symbol == "AAPL":
-                    print(stock.get_moving_average("2020-02-03"))
-                    print(stock.get_bollinger_bands("2020-02-03"))
-                    print(stock.get_moving_average("2017-02-03"))
-                    print(stock.get_bollinger_bands("2017-02-03"))
+    # for market_obj in markets:
+    #     if market_obj.name == "NASDAQ":
+    #         for stock in market_obj.stocks:
+    #             if stock.symbol == "AAPL":
+    #                 print(stock.get_moving_average("2020-02-03"))
+    #                 print(stock.get_bollinger_bands("2020-02-03"))
+    #                 print(stock.get_moving_average("2017-02-03"))
+    #                 print(stock.get_bollinger_bands("2017-02-03"))
+
+    t = Trader("Warren Buffet", 1000.)
+    t.simulate(markets, "NASDAQ:AAPL", "2019-02-01")
+    print(t.check())
+    t = Trader("Warren Buffet", 1000.)
+    t.simulate(markets, "NYSE:JNJ", "2019-02-01")
+    print(t.check())
+    
