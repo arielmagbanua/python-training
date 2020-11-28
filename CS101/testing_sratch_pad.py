@@ -81,10 +81,15 @@
 # date_prev = [int(d) for d in date_prev]
 # year_prev, month_prev, day_prev = date_prev[0], date_prev[1], date_prev[2]
 
-prices_between = [12, 40, 19, 1, 0, 900, 32, 1, 1, 78]
+# prices_between = [12, 40, 19, 1, 0, 900, 32, 1, 1, 78]
 
-max_item =  max(prices_between)
-print(max_item)
+# max_item =  max(prices_between)
+# print(max_item)
 
 # for price in prices_between[2::]:
 #     print(price)
+
+awts = None
+
+if not awts:
+    print('lol')

@@ -178,8 +178,8 @@ class Stock:
             prices_between.append(self.prices[i].price)
             days += 1
 
-        highest_price = min(prices_between)
-        return round(highest_price, 2)
+        lowest_price = min(prices_between)
+        return round(lowest_price, 2)
 
     def get_average_price(self, date: str) -> Union[float, str]:
         """
@@ -619,15 +619,15 @@ if __name__ == "__main__":
     #                 print(price.date, price.price)
     #                 break
 
-    # for market_obj in markets:
-    #     if market_obj.name == "NASDAQ":
-    #         for stock in market_obj.stocks:
-    #             if stock.symbol == "AAPL":
-    #                 print(stock.get_highest_price("2020-02-03"))
-    #                 print(stock.get_lowest_price("2020-02-03"))
-    #                 print(stock.get_average_price("2020-02-03"))
-    #                 print(stock.get_average_volume("2020-02-03"))
-    #                 print(stock.get_highest_price("2017-02-03"))
+    for market_obj in markets:
+        if market_obj.name == "NASDAQ":
+            for stock in market_obj.stocks:
+                if stock.symbol == "AAPL":
+                    print(stock.get_highest_price("2020-02-03"))
+                    print(stock.get_lowest_price("2020-02-03"))
+                    print(stock.get_average_price("2020-02-03"))
+                    print(stock.get_average_volume("2020-02-03"))
+                    print(stock.get_highest_price("2017-02-03"))
 
     # for market_obj in markets:
     #     if market_obj.name == "NASDAQ":
@@ -638,20 +638,20 @@ if __name__ == "__main__":
     #                 print(stock.get_moving_average("2017-02-03"))
     #                 print(stock.get_bollinger_bands("2017-02-03"))
 
-    t = Trader("Warren Buffet", 1000.)
-    t.simulate(markets, "NASDAQ:AAPL", "2019-02-01")
-    print(t.check())
-    t = Trader("Warren Buffet", 1000.)
-    t.simulate(markets, "NYSE:JNJ", "2019-02-01")
-    print(t.check())
+    # t = Trader("Warren Buffet", 1000.)
+    # t.simulate(markets, "NASDAQ:AAPL", "2019-02-01")
+    # print(t.check())
+    # t = Trader("Warren Buffet", 1000.)
+    # t.simulate(markets, "NYSE:JNJ", "2019-02-01")
+    # print(t.check())
 
     # insufficient balance test cases
-    t = Trader("Warren Buffet", 20.0)
-    t.simulate(markets, "NASDAQ:AAPL22", "2019-02-01")
-    print(t.check())
-    t = Trader("Warren Buffet", 20.0)
-    t.simulate(markets, "NYSE:JNJ22", "2019-02-01")
-    print(t.check())
+    # t = Trader("Warren Buffet", 20.0)
+    # t.simulate(markets, "NASDAQ:AAPL22", "2019-02-01")
+    # print(t.check())
+    # t = Trader("Warren Buffet", 20.0)
+    # t.simulate(markets, "NYSE:JNJ22", "2019-02-01")
+    # print(t.check())
 
     # wrong date test cases
     # t = Trader("Warren Buffet", 1000.)
