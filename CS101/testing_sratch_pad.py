@@ -71,32 +71,22 @@
 
 # print(test)
 
-class Person:
-    def __init__(self, name, height, weight):
-        self.name = name
-        self.height = height
-        self.weight = weight
-        self.something = 'something'
-        self.something1 = 'something1'
-        self.something2 = 'something2'
+# date_now = '2019-01-07'
+# date_now = date_now.split('-')
+# date_now = [int(d) for d in date_now]
+# year_now, month_now, day_now = date_now[0], date_now[1], date_now[2]
 
-    def say_name(self):
-        print(self.name)
+# date_prev = '2019-01-01'
+# date_prev = date_prev.split('-')
+# date_prev = [int(d) for d in date_prev]
+# year_prev, month_prev, day_prev = date_prev[0], date_prev[1], date_prev[2]
 
-    def eat(self):
-        print('I am eating')
-    
-    def walk(self):
-        print('Walking!')
+prices_between = [12, 40, 19, 1, 0, 900]
 
-    def __str__(self):
-        # print('str test')
-        return self.name
+prices_between.sort(reverse=True)
+print(prices_between)
 
-ariel = Person('Ariel', 7.0, 80.0)
+ticker = 'NASDAQ:AAPL'
 
-ysa = Person('Ysa', 6.0, 56.0)
-
-print(ariel.something1)
-
-
+market, symbol = tuple(ticker.split(':'))
+print(market, symbol)
