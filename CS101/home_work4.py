@@ -102,7 +102,7 @@ class Stock:
 
     def __repr__(self):
         return "<Stock %s (%s)>" % (self.name, self.symbol)
-    
+
     def get_highest_price(self, date: str) -> Union[float, str]:
         """
         Return a highest price between the given date and the previous 260 days of the given date.
@@ -182,7 +182,7 @@ class Stock:
         # sort and get the highest price
         prices_between.sort()
         return float(prices_between[0])
-    
+
     def get_average_price(self, date: str) -> Union[float, str]:
         """
         Return an average price between the given date and the previous 260 days of the given date.
@@ -421,7 +421,7 @@ def convert_to_objects(stock_prices: List[Tuple[str, str, str, str, float, int]]
             if markets[market_index].stocks[i].symbol == symbol:
                 stock_index = i
                 break
-        
+
         if stock_index == None:
             # create the stock object with initial empty price list
             new_stock = Stock(company_name, symbol, [])
@@ -431,7 +431,7 @@ def convert_to_objects(stock_prices: List[Tuple[str, str, str, str, float, int]]
 
         # add the price to the stock that belongs to the current market
         markets[market_index].stocks[stock_index].prices.append(price)
-    
+
     return markets
 
 
@@ -513,7 +513,7 @@ class Trader:
 
         # unpack holding
         holdings_date, holdings_ticker, holdings_stock_amount, holdings_price = self.holdings
-        
+
         if ticker == holdings_ticker:
             # calculate the total amount that can be sold
             sold = holdings_stock_amount * price
@@ -549,7 +549,7 @@ class Trader:
             1. You have to buy the stock when the price is lower than the lower band of the bollinger bands.
             2. You have to sell the stock when the price is higher than the upper band of the bollinger bands.
         Details are in the document.
-        
+
         Input arguments:
             a list of parsed Market objects (List[Market])
             ticker (str)
@@ -577,7 +577,7 @@ class Trader:
                         # simulate from the designated starting date up to the last date
                         for stock_price in stock.prices[start_date_index::]:
                             bollinger_result = stock.get_bollinger_bands(stock_price.date)
-                            
+
                             if isinstance(bollinger_result, str):
                                 return bollinger_result
 
@@ -587,7 +587,7 @@ class Trader:
                             # buy if stock price is lower than the lower bollinger band
                             if stock_price.price < lower_band:
                                 self.buy(ticker, stock_price.price, stock_price.date)
-                            
+
                             # sell if price is higher than
                             if stock_price.price > upper_band:
                                 self.sell(ticker, stock_price.price)
