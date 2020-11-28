@@ -1,10 +1,10 @@
 import csv
 from typing import Optional, Union, List, Tuple
 
-data_dir = 'D:\Training\python-training\CS101\stock.csv'
+stock_path = 'D:\Training\python-training\CS101\stock.csv'
 
 def csv_load_example():
-    with open(data_dir, newline='') as csvfile:
+    with open(stock_path, newline='') as csvfile:
         reader = csv.reader(csvfile, delimiter=',', quotechar='|')
         for row in reader:
             print(row)
@@ -434,6 +434,7 @@ def convert_to_objects(stock_prices: List[Tuple[str, str, str, str, float, int]]
     
     return markets
 
+
 class Trader:
     """Trader class."""
 
@@ -524,7 +525,6 @@ class Trader:
             # clean up holdings
             self.holdings = tuple()
 
-
     def check(self) -> Tuple[float, Tuple[str, str, int, float]]:
         """
         Return balance holdings fields.
@@ -576,9 +576,14 @@ class Trader:
 
                         # simulate from the designated starting date up to the last date
                         for stock_price in stock.prices[start_date_index::]:
-                            # get the bollinger bands
-                            upper_band, lower_band = stock.get_bollinger_bands(stock_price.date)
+                            bollinger_result = stock.get_bollinger_bands(stock_price.date)
                             
+                            if isinstance(bollinger_result, str):
+                                return bollinger_result
+
+                            # get the bollinger bands
+                            upper_band, lower_band = bollinger_result
+
                             # buy if stock price is lower than the lower bollinger band
                             if stock_price.price < lower_band:
                                 self.buy(ticker, stock_price.price, stock_price.date)
@@ -587,14 +592,14 @@ class Trader:
                             if stock_price.price > upper_band:
                                 self.sell(ticker, stock_price.price)
 
-
     def __repr__(self):
         return "<Trader %s>" % self.name
+
 
 if __name__ == "__main__":
     # csv_load_example()
     # test your implementation
-    stock_tuples = make_stock_tuples(data_dir)
+    stock_tuples = make_stock_tuples(stock_path)
     markets = convert_to_objects(stock_tuples)
 
     # for market_obj in markets:
