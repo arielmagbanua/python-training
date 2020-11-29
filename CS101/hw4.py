@@ -1,15 +1,3 @@
-"""Task 4.1.
-
-Complete two functions: make_stock_tuples, convert_to_objects
-Complete three class implementations: Price, Stock, Market
-(DO NOT TOUCH ATTRIBUTES OF EACH CLASS)
-CAUTION: You CANNOT import any kind of module.
-
-Use csv library to read and parse CSV format.
-https://docs.python.org/3/library/csv.html
-
-"""
-
 import csv
 from typing import Optional, Union, List, Tuple
 
@@ -40,9 +28,6 @@ def make_stock_tuples(data_dir: str) -> List[Tuple[str, str, str, str, float, in
         Volume: int
 
     """
-    #################################################
-    # YOUR CODE HERE
-    #################################################
     stocks = []
 
     with open(data_dir, newline='') as csvfile:
@@ -79,9 +64,6 @@ class Price:
             volume (int): volume of trading for the date
 
         """
-        #################################################
-        # YOUR CODE HERE
-        #################################################
         self.date = date
         self.price = price
         self.volume = volume
@@ -106,9 +88,6 @@ class Stock:
             prices (List[Price]): list of price objects for the stock
 
         """
-        #################################################
-        # YOUR CODE HERE
-        #################################################
         self.name = name
         self.symbol = symbol
         self.prices = prices    
@@ -149,9 +128,6 @@ class Stock:
             highest price (float)
             or error message (str)
         """
-        #################################################
-        # YOUR CODE HERE
-        #################################################
         prices_between = self.get_prices_in_between(date, 260)
 
         if isinstance(prices_between, str):
@@ -172,9 +148,6 @@ class Stock:
             lowest price (float)
             or error message (str)
         """
-        #################################################
-        # YOUR CODE HERE
-        #################################################
         prices_between = self.get_prices_in_between(date, 260)
 
         if isinstance(prices_between, str):
@@ -194,9 +167,6 @@ class Stock:
             agerage price (float, rounded to two decimal places)
             or error message (str)
         """
-        #################################################
-        # YOUR CODE HERE
-        #################################################
         prices_between = self.get_prices_in_between(date, 260)
 
         if isinstance(prices_between, str):
@@ -219,9 +189,6 @@ class Stock:
             agerage volume (float, rounded to two decimal places)
             or error message (str)
         """
-        #################################################
-        # YOUR CODE HERE
-        #################################################
         price_start_index = None
         for i in range(len(self.prices)):
             price_date = self.prices[i].date
@@ -257,9 +224,6 @@ class Stock:
             moving agerage price (float, rounded to two decimal places) 
             or error message (str)
         """
-        #################################################
-        # YOUR CODE HERE
-        #################################################
         prices_between = self.get_prices_in_between(date, 20)
 
         if isinstance(prices_between, str):
@@ -281,9 +245,6 @@ class Stock:
             bollinger band (Tuple[float, float], rounded to two decimal places)
             or error message (str)
         """
-        #################################################
-        # YOUR CODE HERE
-        #################################################
         prices_between = self.get_prices_in_between(date, 20)
 
         if isinstance(prices_between, str):
@@ -317,9 +278,6 @@ class Market:
             stocks (List[Stock]): list of stock objects that belong to the market
 
         """
-        #################################################
-        # YOUR CODE HERE
-        #################################################
         self.name = name
         self.stocks = stocks
 
@@ -340,9 +298,6 @@ def convert_to_objects(stock_prices: List[Tuple[str, str, str, str, float, int]]
         List[Market]: a list of parsed Market objects
 
     """
-    #################################################
-    # YOUR CODE HERE
-    #################################################
     markets = []
     for stock_market_record in stock_prices:
         # unpack the stock_market_record
@@ -406,9 +361,6 @@ class Trader:
 
         """
         self.holdings = tuple()
-        #################################################
-        # YOUR CODE HERE
-        #################################################
         self.name = name
         self.balance = balance
 
@@ -424,9 +376,6 @@ class Trader:
         Return:
             None
         """
-        #################################################
-        # YOUR CODE HERE
-        #################################################
         # check if there's current holding
         if len(self.holdings) > 0 or self.balance < price:
             return
@@ -454,9 +403,6 @@ class Trader:
         Return:
             None
         """
-        #################################################
-        # YOUR CODE HERE
-        #################################################
         if len(self.holdings) == 0:
             return
 
@@ -485,9 +431,6 @@ class Trader:
                 balance (str), and
                 holdings (Tuple[str, str, int, float])
         """
-        #################################################
-        # YOUR CODE HERE
-        #################################################
         return (self.balance, self.holdings)
 
     def simulate(self, markets: List[Market], ticker: str, date: str) -> Optional[str]:
@@ -506,9 +449,6 @@ class Trader:
             None
             or error message (str)
         """
-        #################################################
-        # YOUR CODE HERE
-        #################################################
         market = ""
         symbol = ""
 
