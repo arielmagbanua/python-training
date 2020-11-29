@@ -27,9 +27,6 @@ def make_stock_tuples(data_dir: str) -> List[Tuple[str, str, str, str, float, in
         Volume: int
 
     """
-    #################################################
-    # YOUR CODE HERE
-    #################################################
     stocks = []
 
     with open(data_dir, newline='') as csvfile:
@@ -40,7 +37,7 @@ def make_stock_tuples(data_dir: str) -> List[Tuple[str, str, str, str, float, in
 
         # slice the real stocks data to exclude the header
         stocks_data = stocks_data[1::]
-        
+
         # create and append the stock tuples
         for stock in stocks_data:
             stock_tup = (str(stock[0]), str(stock[1]), str(stock[2]), str(stock[3]), float(stock[4]), int(stock[5]))
@@ -66,9 +63,6 @@ class Price:
             volume (int): volume of trading for the date
 
         """
-        #################################################
-        # YOUR CODE HERE
-        #################################################
         self.date = date
         self.price = price
         self.volume = volume
@@ -93,9 +87,6 @@ class Stock:
             prices (List[Price]): list of price objects for the stock
 
         """
-        #################################################
-        # YOUR CODE HERE
-        #################################################
         self.name = name
         self.symbol = symbol
         self.prices = prices
@@ -107,16 +98,13 @@ class Stock:
         """
         Return a highest price between the given date and the previous 260 days of the given date.
         Details are in the document.
-        
+
         Input arguments:
             date (str)
         Return:
             highest price (float)
             or error message (str)
         """
-        #################################################
-        # YOUR CODE HERE
-        #################################################
         # get the starting index of the date
         price_start_index = None
         for i in range(len(self.prices)):
@@ -124,7 +112,7 @@ class Stock:
             if date == price_date:
                 price_start_index = i
                 break
-        
+
         if price_start_index == None or price_start_index < 259:
             return "Please check the date."
 
@@ -135,10 +123,10 @@ class Stock:
             if days > 260:
                 # already exceeding 260 days so break the loop
                 break
-            
+
             prices_between.append(self.prices[i].price)
             days += 1
-        
+
         highest_price = max(prices_between)
         return round(highest_price, 2)
 
@@ -146,16 +134,13 @@ class Stock:
         """
         Return a lowest price between the given date and the previous 260 days of the given date.
         Details are in the document.
-        
+
         Input arguments:
             date (str)
         Return:
             lowest price (float)
             or error message (str)
         """
-        #################################################
-        # YOUR CODE HERE
-        #################################################
         # get the starting index of the date
         price_start_index = None
         for i in range(len(self.prices)):
@@ -166,7 +151,7 @@ class Stock:
 
         if price_start_index == None or price_start_index < 259:
             return "Please check the date."
-        
+
         # loop from the starting index to previous 260 records
         days = 1
         prices_between = []
@@ -174,7 +159,7 @@ class Stock:
             if days > 260:
                 # already exceeding 260 days so break the loop
                 break
-            
+
             prices_between.append(self.prices[i].price)
             days += 1
 
@@ -185,16 +170,13 @@ class Stock:
         """
         Return an average price between the given date and the previous 260 days of the given date.
         Details are in the document.
-        
+
         Input arguments:
             date (str)
         Return:
             agerage price (float, rounded to two decimal places)
             or error message (str)
         """
-        #################################################
-        # YOUR CODE HERE
-        #################################################
         # get the starting index of the date
         price_start_index = None
         for i in range(len(self.prices)):
@@ -205,7 +187,7 @@ class Stock:
 
         if price_start_index == None or price_start_index < 259:
             return "Please check the date."
-        
+
         # loop from the starting index to previous 260 records
         days = 1
         prices_between = []
@@ -213,18 +195,18 @@ class Stock:
             if days > 260:
                 # already exceeding 260 days so break the loop
                 break
-            
+
             prices_between.append(self.prices[i].price)
             days += 1
-        
+
         avg = sum(prices_between) / 260.0
         return round(avg, 2)
-        
+
     def get_average_volume(self, date: str) -> Union[float, str]:
         """
         Return an average volume between the given date and the previous 260 days of the given date.
         Details are in the document.
-        
+
         Input arguments:
             year (int)
             month (int)
@@ -233,9 +215,6 @@ class Stock:
             agerage volume (float, rounded to two decimal places)
             or error message (str)
         """
-        #################################################
-        # YOUR CODE HERE
-        #################################################
         # get the starting index of the date
         price_start_index = None
         for i in range(len(self.prices)):
@@ -246,7 +225,7 @@ class Stock:
 
         if price_start_index == None or price_start_index < 259:
             return "Please check the date."
-        
+
         # loop from the starting index to previous 260 records
         days = 1
         volumes_between = []
@@ -254,13 +233,13 @@ class Stock:
             if days > 260:
                 # already exceeding 260 days so break the loop
                 break
-            
+
             volumes_between.append(self.prices[i].volume)
             days += 1
-        
+
         avg = sum(volumes_between) / 260.0
         return round(avg, 2)
-    
+
     def get_moving_average(self, date: str) -> Union[float, str]:
         """
         Return a moving average price between the given date and the previous 20 days of the given date.
@@ -272,9 +251,6 @@ class Stock:
             moving agerage price (float, rounded to two decimal places) 
             or error message (str)
         """
-        #################################################
-        # YOUR CODE HERE
-        #################################################
         # get the starting index of the date
         price_start_index = None
         for i in range(len(self.prices)):
@@ -285,7 +261,7 @@ class Stock:
 
         if price_start_index == None or price_start_index < 19:
             return "Please check the date."
-        
+
         # loop from the starting index to previous 260 records
         days = 1
         prices_between = []
@@ -293,10 +269,10 @@ class Stock:
             if days > 20:
                 # already exceeding 20 days so break the loop
                 break
-            
+
             prices_between.append(self.prices[i].price)
             days += 1
-        
+
         avg = sum(prices_between) / 20.0
         return round(avg, 2)
 
@@ -305,16 +281,13 @@ class Stock:
         Return a tuple of the upper band and lower band of bollinger band between the given date and
         the previous 20 days of the given date.
         Details are in the document.
-        
+
         Input arguments:
             date(str)
         Return:
             bollinger band (Tuple[float, float], rounded to two decimal places)
             or error message (str)
         """
-        #################################################
-        # YOUR CODE HERE
-        #################################################
         # get the starting index of the date
         price_start_index = None
         for i in range(len(self.prices)):
@@ -322,10 +295,10 @@ class Stock:
             if date == price_date:
                 price_start_index = i
                 break
-        
+
         if price_start_index == None or price_start_index < 19:
             return "Please check the date."
-        
+
         # loop from the starting index to previous 260 records
         days = 1
         prices_between = []
@@ -366,9 +339,6 @@ class Market:
             stocks (List[Stock]): list of stock objects that belong to the market
 
         """
-        #################################################
-        # YOUR CODE HERE
-        #################################################
         self.name = name
         self.stocks = stocks
 
@@ -389,9 +359,6 @@ def convert_to_objects(stock_prices: List[Tuple[str, str, str, str, float, int]]
         List[Market]: a list of parsed Market objects
 
     """
-    #################################################
-    # YOUR CODE HERE
-    #################################################
     markets = []
     for stock_market_record in stock_prices:
         # unpack and get all the field values
@@ -455,9 +422,6 @@ class Trader:
 
         """
         self.holdings = tuple()
-        #################################################
-        # YOUR CODE HERE
-        #################################################
         self.name = name
         self.balance = balance
 
@@ -473,9 +437,6 @@ class Trader:
         Return:
             None
         """
-        #################################################
-        # YOUR CODE HERE
-        #################################################
         # check if there's current holding
         # if exist, buying additional stocks are not allowed
         if len(self.holdings) > 0 or self.balance < price:
@@ -503,9 +464,6 @@ class Trader:
         Return:
             None
         """
-        #################################################
-        # YOUR CODE HERE
-        #################################################
         # check if there is holdings
         if len(self.holdings) == 0:
             return
@@ -536,9 +494,6 @@ class Trader:
                 balance (str), and
                 holdings (Tuple[str, str, int, float])
         """
-        #################################################
-        # YOUR CODE HERE
-        #################################################
         return (self.balance, self.holdings)
 
     def simulate(self, markets: List[Market], ticker: str, date: str) -> Optional[str]:
@@ -557,9 +512,6 @@ class Trader:
             None
             or error message (str)
         """
-        #################################################
-        # YOUR CODE HERE
-        #################################################
         # get the market and symbol from the ticker
         market = ""
         symbol = ""
