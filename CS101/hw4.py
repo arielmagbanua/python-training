@@ -11,7 +11,7 @@ https://docs.python.org/3/library/csv.html
 """
 
 import csv
-from typing import Union, List, Tuple
+from typing import Optional, Union, List, Tuple
 
 stock_path = 'D:\Training\python-training\CS101\stock.csv'
 
@@ -116,11 +116,33 @@ class Stock:
     def __repr__(self):
         return "<Stock %s (%s)>" % (self.name, self.symbol)
 
+    def get_prices_in_between(self, date: str, n_days: int) ->  Union[List[float], str]:
+        start_index = None
+        for i in range(len(self.prices)):
+            price_date = self.prices[i].date
+            if date == price_date:
+                start_index = i
+                break
+
+        if start_index == None or start_index < (n_days - 1):
+            return "Please check the date."
+
+        days = 1
+        prices_between = []
+        for i in reversed(range(start_index + 1)):
+            if days > n_days:
+                break
+
+            prices_between.append(self.prices[i].price)
+            days += 1
+
+        return prices_between
+
     def get_highest_price(self, date: str) -> Union[float, str]:
         """
         Return a highest price between the given date and the previous 260 days of the given date.
         Details are in the document.
-        
+
         Input arguments:
             date (str)
         Return:
@@ -130,35 +152,20 @@ class Stock:
         #################################################
         # YOUR CODE HERE
         #################################################
-        price_start_index = None
-        for i in range(len(self.prices)):
-            price_date = self.prices[i].date
-            if date == price_date:
-                price_start_index = i
-                break
-        
-        if price_start_index == None or price_start_index < 259:
-            return "Please check the date."
+        prices_between = self.get_prices_in_between(date, 260)
 
-        # loop from the starting index to previous 260 records
-        days = 1
-        prices_between = []
-        for i in reversed(range(price_start_index + 1)):
-            if days > 260:
-                # already exceeding 260 days so break the loop
-                break
-            
-            prices_between.append(self.prices[i].price)
-            days += 1
+        if isinstance(prices_between, str):
+            return prices_between
 
         highest_price = max(prices_between)
+
         return round(highest_price, 2)
 
     def get_lowest_price(self, date: str) -> Union[float, str]:
         """
         Return a lowest price between the given date and the previous 260 days of the given date.
         Details are in the document.
-        
+
         Input arguments:
             date (str)
         Return:
@@ -168,35 +175,19 @@ class Stock:
         #################################################
         # YOUR CODE HERE
         #################################################
-        price_start_index = None
-        for i in range(len(self.prices)):
-            price_date = self.prices[i].date
-            if date == price_date:
-                price_start_index = i
-                break
-        
-        if price_start_index == None or price_start_index < 259:
-            return "Please check the date."
+        prices_between = self.get_prices_in_between(date, 260)
 
-        # loop from the starting index to previous 260 records
-        days = 1
-        prices_between = []
-        for i in reversed(range(price_start_index + 1)):
-            if days > 260:
-                # already exceeding 260 days so break the loop
-                break
-            
-            prices_between.append(self.prices[i].price)
-            days += 1
+        if isinstance(prices_between, str):
+            return prices_between
 
-        highest_price = min(prices_between)
-        return round(highest_price, 2)
+        lowest_price = min(prices_between)
+        return round(lowest_price, 2)
 
     def get_average_price(self, date: str) -> Union[float, str]:
         """
         Return an average price between the given date and the previous 260 days of the given date.
         Details are in the document.
-        
+
         Input arguments:
             date (str)
         Return:
@@ -206,35 +197,20 @@ class Stock:
         #################################################
         # YOUR CODE HERE
         #################################################
-        price_start_index = None
-        for i in range(len(self.prices)):
-            price_date = self.prices[i].date
-            if date == price_date:
-                price_start_index = i
-                break
-        
-        if price_start_index == None or price_start_index < 259:
-            return "Please check the date."
+        prices_between = self.get_prices_in_between(date, 260)
 
-        # loop from the starting index to previous 260 records
-        days = 1
-        prices_between = []
-        for i in reversed(range(price_start_index + 1)):
-            if days > 260:
-                # already exceeding 260 days so break the loop
-                break
-            
-            prices_between.append(self.prices[i].price)
-            days += 1
-        
+        if isinstance(prices_between, str):
+            return prices_between
+
         avg = sum(prices_between) / 260.0
+
         return round(avg, 2)
 
     def get_average_volume(self, date: str) -> Union[float, str]:
         """
         Return an average volume between the given date and the previous 260 days of the given date.
         Details are in the document.
-        
+
         Input arguments:
             year (int)
             month (int)
@@ -274,7 +250,7 @@ class Stock:
         """
         Return a moving average price between the given date and the previous 20 days of the given date.
         Details are in the document.
-        
+
         Input arguments:
             date (str)
         Return:
@@ -284,28 +260,13 @@ class Stock:
         #################################################
         # YOUR CODE HERE
         #################################################
-        price_start_index = None
-        for i in range(len(self.prices)):
-            price_date = self.prices[i].date
-            if date == price_date:
-                price_start_index = i
-                break
-        
-        if price_start_index == None or price_start_index < 19:
-            return "Please check the date."
+        prices_between = self.get_prices_in_between(date, 20)
 
-        # loop from the starting index to previous 260 records
-        days = 1
-        prices_between = []
-        for i in reversed(range(price_start_index + 1)):
-            if days > 20:
-                # already exceeding 260 days so break the loop
-                break
+        if isinstance(prices_between, str):
+            return prices_between
 
-            prices_between.append(self.prices[i].price)
-            days += 1
-        
         avg = sum(prices_between) / 20.0
+
         return round(avg, 2)
     
     def get_bollinger_bands(self, date: str) -> Union[Tuple[float, float], str]:
@@ -313,7 +274,7 @@ class Stock:
         Return a tuple of the upper band and lower band of bollinger band between the given date and
         the previous 20 days of the given date.
         Details are in the document.
-        
+
         Input arguments:
             date(str)
         Return:
@@ -323,27 +284,10 @@ class Stock:
         #################################################
         # YOUR CODE HERE
         #################################################
-        price_start_index = None
-        for i in range(len(self.prices)):
-            price_date = self.prices[i].date
-            if date == price_date:
-                price_start_index = i
-                break
-        
-        if price_start_index == None or price_start_index < 19:
-            return "Please check the date."
-        
+        prices_between = self.get_prices_in_between(date, 20)
 
-        # loop from the starting index to previous 260 records
-        days = 1
-        prices_between = []
-        for i in reversed(range(price_start_index + 1)):
-            if days > 20:
-                # already exceeding 260 days so break the loop
-                break
-
-            prices_between.append(self.prices[i].price)
-            days += 1
+        if isinstance(prices_between, str):
+            return prices_between
         
         n = len(prices_between)
         phat = self.get_moving_average(date)
@@ -440,6 +384,172 @@ def convert_to_objects(stock_prices: List[Tuple[str, str, str, str, float, int]]
     return markets
 
 
+class Trader:
+    """Trader class."""
+
+    name: str
+    balance: float
+    holdings: Tuple[str, str, int, float]
+
+    def __init__(self, name: str, balance: float):
+        """
+        Initialize new Trader
+
+        Args:
+            name (str): name of market
+            balance (float): current cash the trader has
+            holdings (Tuple[str, str, int, float]): tuple consists of
+                Date: str,
+                Ticker: str,
+                the amount of the stock: int, and
+                the price when you bought: float
+
+        """
+        self.holdings = tuple()
+        #################################################
+        # YOUR CODE HERE
+        #################################################
+        self.name = name
+        self.balance = balance
+
+    def buy(self, ticker: str, price: float, date: str) -> None:
+        """
+        Update holdings and balance fields after buying.
+        Details are in the document.
+
+        Input arguments:
+            ticker (str)
+            price (float)
+            date (str)
+        Return:
+            None
+        """
+        #################################################
+        # YOUR CODE HERE
+        #################################################
+        # check if there's current holding
+        if len(self.holdings) > 0 or self.balance < price:
+            return
+
+        # compute the maximum amount of stocks to buy
+        stock_amount = int(self.balance / price)
+
+        # record the holdings
+        self.holdings = (date, ticker, stock_amount, price)
+
+        spent = stock_amount * price
+
+        # updated balance
+        new_balance = self.balance - spent
+        self.balance = round(new_balance, 2)
+
+    def sell(self, ticker: str, price: float) -> None:
+        """
+        Update holdings and balance fields after selling.
+        Details are in the document.
+
+        Input arguments:
+            ticker (str)
+            price (float)
+        Return:
+            None
+        """
+        #################################################
+        # YOUR CODE HERE
+        #################################################
+        if len(self.holdings) == 0:
+            return
+
+        # unpack the holdings
+        holdings_date, holdings_ticker, holdings_stock_amount, holdings_price = self.holdings
+
+        if ticker == holdings_ticker:
+            # calculate the total amount gained
+            sold = holdings_stock_amount * price
+
+            # add the sold to current balance
+            new_balance = self.balance + sold
+            self.balance = round(new_balance, 2)
+
+            self.holdings = tuple()
+
+    def check(self) -> Tuple[float, Tuple[str, str, int, float]]:
+        """
+        Return balance holdings fields.
+        Details are in the document.
+
+        Input arguments:
+            None
+        Return:
+            Tuple[float, Tuple[str, str, int, float]]: tuple consists of
+                balance (str), and
+                holdings (Tuple[str, str, int, float])
+        """
+        #################################################
+        # YOUR CODE HERE
+        #################################################
+        return (self.balance, self.holdings)
+
+    def simulate(self, markets: List[Market], ticker: str, date: str) -> Optional[str]:
+        """
+        Trading simulator with given date and ticker.
+        Trading algorithm is as follows:
+            1. You have to buy the stock when the price is lower than the lower band of the bollinger bands.
+            2. You have to sell the stock when the price is higher than the upper band of the bollinger bands.
+        Details are in the document.
+
+        Input arguments:
+            a list of parsed Market objects (List[Market])
+            ticker (str)
+            date (str)
+        Return:
+            None
+            or error message (str)
+        """
+        #################################################
+        # YOUR CODE HERE
+        #################################################
+        market = ""
+        symbol = ""
+
+        try:
+            market, symbol = tuple(ticker.split(':'))
+        except Exception:
+            return "Please check the ticker."
+
+        for market_obj in markets:
+            if market == market_obj.name:
+                for stock in market_obj.stocks:
+                    if symbol == stock.symbol:
+                        # get the starting index of the date
+                        start_date_index = None
+                        for i in range(len(stock.prices)):
+                            if date == stock.prices[i].date:
+                                start_date_index = i
+                                break
+                        
+                        if start_date_index == None:
+                            return "Please check the date."
+
+                        # simulate fron the designated starting date up to the last entry date of the price
+                        for stock_price in stock.prices[start_date_index::]:
+                            # get the bollinger bands for the curren price date
+                            bollinger_result = stock.get_bollinger_bands(stock_price.date)
+
+                            if isinstance(bollinger_result, str):
+                                return bollinger_result
+
+                            upper_band, lower_band = bollinger_result
+
+                            if stock_price.price < lower_band:
+                                self.buy(ticker, stock_price.price, stock_price.date)
+
+                            if stock_price.price > upper_band:
+                                self.sell(ticker, stock_price.price)
+
+    def __repr__(self):
+        return "<Trader %s>" % self.name
+
 
 if __name__ == "__main__":
     # csv_load_example()
@@ -466,11 +576,28 @@ if __name__ == "__main__":
     #                 print(stock.get_average_volume("2020-02-03"))
     #                 print(stock.get_highest_price("2017-02-03"))
 
-    for market_obj in markets:
-        if market_obj.name == "NASDAQ":
-            for stock in market_obj.stocks:
-                if stock.symbol == "AAPL":
-                    print(stock.get_moving_average("2020-02-03"))
-                    print(stock.get_bollinger_bands("2020-02-03"))
-                    print(stock.get_moving_average("2017-02-03"))
-                    print(stock.get_bollinger_bands("2017-02-03"))
+    # for market_obj in markets:
+    #     if market_obj.name == "NASDAQ":
+    #         for stock in market_obj.stocks:
+    #             if stock.symbol == "AAPL":
+    #                 print(stock.get_moving_average("2020-02-03"))
+    #                 print(stock.get_bollinger_bands("2020-02-03"))
+    #                 print(stock.get_moving_average("2017-02-03"))
+    #                 print(stock.get_bollinger_bands("2017-02-03"))
+
+    # t = Trader("Warren Buffet", 1000.)
+    # t.simulate(markets, "NASDAQ:AAPL", "2019-02-01")
+    # print(t.check())
+    # t = Trader("Warren Buffet", 1000.)
+    # t.simulate(markets, "NYSE:JNJ", "2019-02-01")
+    # print(t.check())
+
+    # t = Trader("Warren Buffet", 1000.)
+    # test_result = t.simulate(markets, "NASDAQ:AAPL", "2021-01-02")
+    # print(test_result)
+    # print(t.check())
+
+    # t = Trader("Warren Buffet", 1000000.0)
+    # test_result = t.simulate(markets, "PSE", "2019-02-01")
+    # print(test_result)
+    # print(t.check())
