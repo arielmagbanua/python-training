@@ -89,7 +89,29 @@
 # for price in prices_between[2::]:
 #     print(price)
 
-awts = None
+# largest = None
+# smallest = None
 
-if not awts:
-    print('lol')
+# numbers = []
+
+# while True:
+#     num = input("Enter a number: ")
+#     if num == "done":
+#         break
+
+#     try:
+#         num = int(num)
+#         numbers.append(num)
+#     except:
+#         continue
+
+# largest = max(numbers)
+# smallest = min(numbers)
+# print("Maximum", largest)
+# print("Minimum", smallest)
+
+import os
+dirname = os.path.dirname(__file__)
+path = os.path.join(dirname, 'images/')
+
+print(path)
