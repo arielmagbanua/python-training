@@ -32,7 +32,7 @@ class Card:
 
 def initialize():
     # initialize cards
-    for i in range(6):
+    for i in range(len(names)):
         for k in range(4):
             # images won't load in windows 10 replace it with text
             card = Card(names[i])
@@ -53,7 +53,7 @@ def print_cards():
     h = 0
     i_w = 70
     i_h = 90
-    for i in range(len(num_pads)):
+    for i in range(len(cards)):
         ################################################################
         # if i%2 == 0:    # 3-2-2. rewrite the condition for visualization.
         ################################################################
@@ -196,13 +196,9 @@ while guessed_count < (len(names) * 4): # 3-2-3. Rewrite the condition for termi
 
     if check(num1, num2):
         print("Correct!")
+        guessed_count += 1
     else:
         print("Wrong!")
-
-    guessed_count = 0
-    for card in cards:
-        if card.guessed:
-            guessed_count += 1
     
     ###########################################################################
     # 3-2-5. Update number of tries (global variable, tries)
