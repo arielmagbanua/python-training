@@ -1,4 +1,5 @@
 import csv
+from typing import Optional, Union, List, Tuple
 
 path = 'D:\\Training\\python-training\\CS101\\products.csv'
 
@@ -69,6 +70,36 @@ def make_product_tuples(products_dir: str):
 # - product_discount -> float / None
 # - product_type -> str / None
 # - quantity -> int
+# 
+# Define the __str__ for printing the product "{sku} - {ttitle}"
+class Product:
+    def __init__(
+        self,
+        sku: str,
+        description: str,
+        title: str,
+        price: float,
+        weight: float,
+        inactive: bool,
+        sale_price: Union[float, None],
+        product_discount: Union[float, None],
+        product_type: Union[str, None],
+        quantity: int
+    ):
+        self.sku = sku
+        self.description = description
+        self.title = title
+        self.price = price
+        self.weight = weight
+        self.inactive = inactive
+        self.sale_price = sale_price
+        self.product_discount = product_discount
+        self.product_type = product_type
+        self.quantity = quantity
+    
+    def __str__(self):
+        return '{} - {}'.format(self.sku, self.title)
+
 
 # create a list of product objects from the list of product tuples
 def make_product_objects(product_tuples):
@@ -105,5 +136,5 @@ def make_product_objects(product_tuples):
 #       After buying update the balance of the customer
 
 if __name__ == "__main__":
-    make_product_tuples(path)
+    product_tups = make_product_tuples(path)
     pass
