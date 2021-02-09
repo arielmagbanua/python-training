@@ -132,3 +132,5 @@ dmypy.json
 
 CS101/output.txt
 CS101/tpmon.csv
+
+emaildb.sqlite
