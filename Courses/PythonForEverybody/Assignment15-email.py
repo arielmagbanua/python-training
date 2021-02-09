@@ -34,6 +34,6 @@ for line in fh:
 query_str = 'SELECT org, count FROM Counts ORDER BY count DESC LIMIT 10'
 
 for row in cur.execute(query_str):
-    print(str(row[0]), row[1])
+    print('Org: {}\n Count: {}'.format(str(row[0]), row[1]))
 
 cur.close()
