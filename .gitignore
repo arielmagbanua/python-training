@@ -134,3 +134,4 @@ CS101/output.txt
 CS101/tpmon.csv
 
 Courses/PythonForEverybody/*.sqlite
+Courses/PythonForEverybody/**/*.sqlite
