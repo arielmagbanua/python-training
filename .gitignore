@@ -135,3 +135,4 @@ CS101/tpmon.csv
 
 Courses/PythonForEverybody/*.sqlite
 Courses/PythonForEverybody/**/*.sqlite
+Courses/PythonForEverybody/capstone/spider.js
