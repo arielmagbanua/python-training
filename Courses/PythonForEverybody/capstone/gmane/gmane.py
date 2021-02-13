@@ -2,12 +2,9 @@ import sqlite3
 import time
 import ssl
 import urllib.request
-import urllib.parse
 import urllib.error
-from urllib.parse import urljoin
-from urllib.parse import urlparse
 import re
-from datetime import datetime, timedelta
+from datetime import datetime
 
 # Not all systems have this so conditionally define parser
 try:

@@ -1,6 +1,4 @@
 import sqlite3
-import time
-import zlib
 
 conn = sqlite3.connect('index.sqlite')
 cur = conn.cursor()

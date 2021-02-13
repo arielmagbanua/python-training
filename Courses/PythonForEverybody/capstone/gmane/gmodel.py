@@ -1,8 +1,7 @@
 import sqlite3
-import time
 import re
 import zlib
-from datetime import datetime, timedelta
+from datetime import datetime
 
 # Not all systems have this
 try:

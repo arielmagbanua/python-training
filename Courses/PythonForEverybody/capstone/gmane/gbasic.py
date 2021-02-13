@@ -1,6 +1,4 @@
 import sqlite3
-import time
-import zlib
 
 how_many = int(input("How many to dump? "))
 
