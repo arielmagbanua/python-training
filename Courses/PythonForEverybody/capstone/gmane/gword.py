@@ -46,7 +46,7 @@ print('Range of counts:', highest, lowest)
 bigsize = 80
 smallsize = 20
 
-fhand = open('gword.js','w')
+fhand = open('gword.js', 'w')
 fhand.write("gword = [")
 first = True
 
