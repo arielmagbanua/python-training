@@ -25,7 +25,7 @@ SECRET_KEY = '$llc-3m(o_pqhes5jen1itm!e@b%2@*9pa*%77kj^aajb17&l6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
