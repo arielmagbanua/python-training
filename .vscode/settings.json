@@ -1,5 +1,7 @@
 {
     "python.autoComplete.extraPaths": [
     
-    ]
+    ],
+    "python.analysis.extraPaths": [],
+    "python.formatting.provider": "black"
 }

@@ -1,0 +1,6 @@
+Sydney 10
+Kathmandu 5.75
+London 1
+Beijing 8
+Vancouver -7
+Cairo 2
