@@ -14,4 +14,5 @@ today = date.today()
 print("Today is: " + today.strftime('%A %d, %b %Y'))
 numberOfDayslived = (today-bday).days
 
-print("Dear " + firstname.capitalize())
+# print("Dear " + firstname.capitalize())
+print("Dear " + firstname.capitalize() + " " + lastname.capitalize() + ", you have been in this world for " + str(numberOfDayslived) + " days.")
