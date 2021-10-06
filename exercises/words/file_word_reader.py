@@ -1,3 +1,4 @@
+from os import read
 from pathlib import Path
 
 class FileWordReader:
@@ -19,11 +20,4 @@ class FileWordReader:
                 words = line.lower().strip().split(' ')
 
                 all_words += words
-
-                # # loop through each word and tally the count
-                # for word in words:
-                #     # make lower case and add to list
-                #     words.append(word)
-    
         return all_words
-
