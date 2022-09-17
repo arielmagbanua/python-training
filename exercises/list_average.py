@@ -22,5 +22,7 @@ float_average = float(average)
 # print the output
 if failing_grades == 0:
     print(f"Average is: {float_average:.2f}. You didn't fail in any subject.")
+elif failing_grades == len_of_grades:
+    print(f"Average is: {float_average:.2f}. You failed in all your subjects.")
 else:
     print(f"Average is: {float_average:.2f}. You failed in {failing_grades} subjects.")
